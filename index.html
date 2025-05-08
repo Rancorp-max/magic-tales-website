@@ -23,24 +23,64 @@
     </div>
   </header>
 
-<!-- Hero Section -->
-<section class="relative bg-gradient-to-b from-pink-100 via-white to-pink-100 py-20 overflow-hidden">
-  <div class="container mx-auto flex flex-col items-center text-center px-6">
-    
-    <!-- Headline and Subheadline -->
+<!-- Hero Section with Floating Magic -->
+<section class="relative bg-gradient-to-b from-pink-100 via-white to-pink-100 py-24 overflow-hidden">
+  
+  <!-- Floating Magic Elements -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <!-- Floating Star 1 -->
+    <div class="absolute w-8 h-8 bg-white opacity-30 rounded-full animate-float-slow" style="top: 20%; left: 10%;"></div>
+    <!-- Floating Star 2 -->
+    <div class="absolute w-6 h-6 bg-white opacity-30 rounded-full animate-float-medium" style="top: 40%; left: 80%;"></div>
+    <!-- Floating Sparkle 1 -->
+    <div class="absolute w-4 h-4 bg-white opacity-20 rounded-full animate-float-fast" style="top: 60%; left: 30%;"></div>
+    <!-- Floating Sparkle 2 -->
+    <div class="absolute w-5 h-5 bg-white opacity-20 rounded-full animate-float-medium" style="top: 70%; left: 60%;"></div>
+  </div>
+
+  <div class="container mx-auto flex flex-col items-center text-center relative z-10 px-6">
+    <!-- Headline -->
     <h1 class="text-5xl font-bold mb-6 text-gray-800 leading-tight max-w-3xl">Bring Your Child's Adventures to Life!</h1>
     <p class="text-xl mb-8 text-gray-600 max-w-2xl">Create a one-of-a-kind storybook starring your child, full of magic, wonder, and adventure!</p>
-
-    <!-- Call to Action Button -->
     <a href="#categories" class="inline-block bg-pink-500 hover:bg-pink-600 text-white text-lg font-semibold px-8 py-4 rounded-full mb-12">Create a Book</a>
 
     <!-- Hero Image -->
     <div class="w-full max-w-4xl">
-      <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full object-cover opacity-90 rounded-3xl shadow-lg">
+      <img src="./assets/hero-image.png" alt="Magical storybook illustration" class="w-full object-cover opacity-90 rounded-3xl shadow-lg">
     </div>
-
   </div>
+
 </section>
+
+<!-- Add this Tailwind Custom CSS for Animation -->
+<style>
+@keyframes floatSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+@keyframes floatMedium {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+  100% { transform: translateY(0px); }
+}
+@keyframes floatFast {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+.animate-float-medium {
+  animation: floatMedium 6s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: floatFast 4s ease-in-out infinite;
+}
+</style>
+
 
 
 
