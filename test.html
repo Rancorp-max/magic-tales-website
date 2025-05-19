@@ -1,9 +1,31 @@
-<!DOCTYPE html><html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MagicTales - Personalized Storybooks</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+  </style>
 </head>
 <body class="bg-white text-gray-800">
 <!-- Hero Section with Background Image and Floating Form -->
@@ -11,39 +33,54 @@
   <div class="absolute inset-0 z-0">
     <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full h-full object-cover opacity-80">
     <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70"></div>
-  </div>
-
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center w-full px-6">
+  </div>  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center w-full px-6">
     <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto mb-4">Bring Your Child's Adventures to Life!</h1>
-    <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">Create a personalized storybook starring your child, full of magic, wonder, and adventure!</p>
+    <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">Create a personalized storybook starring your child, full of magic, wonder, and adventure!</p><div class="max-w-xl mx-auto bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-xl p-6">
+  <h2 class="text-2xl font-bold text-sky-400 mb-2">Ready to Make Some Magic?</h2>
+  <p class="text-sky-500 mb-4 font-medium flex items-center justify-center gap-2">
+    <span class="inline-flex items-center gap-2 relative group">
+      <svg class="w-6 h-6 text-yellow-300 animate-sparkle cursor-help" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z" />
+      </svg>
+      <span>Sign up now and get <span class="font-bold text-sky-600">50% off</span> your first storybook!</span>
+      <span class="absolute bottom-full mb-2 w-56 text-sm text-white bg-sky-400 rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-white shadow-lg animate-glow">
+        You'll receive the discount code by email once we launch!
+      </span>
+    </span>
+  </p>
+  <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
+    <input type="email" name="email" required placeholder="Your email address"
+           class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-300 w-full sm:w-auto">
+    <button type="submit"
+            class="bg-sky-200 hover:bg-sky-300 text-gray-800 font-semibold px-6 py-3 rounded-full transition">
+      Notify Me
+    </button>
+  </form>
+</div>
 
-    <div class="max-w-xl mx-auto bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-xl p-6">
-      <h2 class="text-2xl font-bold text-sky-400 mb-2">Ready to Make Some Magic?</h2>
-      <p class="text-sky-500 mb-4 font-medium flex items-center justify-center gap-2">
-        <span class="inline-flex items-center gap-2 relative group">
-          <svg class="w-6 h-6 text-yellow-300 animate-sparkle cursor-help" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z" />
-          </svg>
-          <span>Sign up now and get <span class="font-bold text-sky-600">50% off</span> your first storybook!</span>
-          <span class="absolute bottom-full mb-2 w-56 text-sm text-white bg-sky-400 rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-white shadow-lg animate-glow">
-            You'll receive the discount code by email once we launch!
-          </span>
-        </span>
-      </p>
-      <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
-        <input type="email" name="email" required placeholder="Your email address"
-               class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-300 w-full sm:w-auto">
-        <button type="submit"
-                class="bg-sky-200 hover:bg-sky-300 text-gray-800 font-semibold px-6 py-3 rounded-full transition">
-          Notify Me
-        </button>
-      </form>
+  </div>
+</section><!-- How It Works Section --><section class="py-20 bg-sky-50 text-center">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-sky-600 mb-12 animate-on-scroll">How It Works</h2>
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/upload.png" alt="Upload" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">1. Upload Your Photo</h3>
+        <p class="text-gray-600">Choose a fun photo of your child — this will be transformed into a magical storybook character!</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/book.png" alt="Customize" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">2. Watch the Magic</h3>
+        <p class="text-gray-600">Our AI creates stunning illustrations and brings your child’s likeness into every page of the story.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/send-letter.png" alt="Delivery" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">3. Receive Your Book</h3>
+        <p class="text-gray-600">Get your beautifully printed, personalized book delivered to your door – a keepsake to treasure forever.</p>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- Footer Section -->
-<footer class="bg-white py-10 border-t mt-20">
+</section><!-- Footer Section --><footer class="bg-white py-10 border-t mt-20">
   <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
     <div class="mb-4">
       <span class="text-xl font-bold text-blue-500">MagicTales</span> © 2025. All Rights Reserved.
@@ -54,10 +91,7 @@
       <a href="#" class="hover:text-blue-500"><img src="https://img.icons8.com/ios-filled/24/pinterest.png" alt="Pinterest" class="inline-block"></a>
     </div>
   </div>
-</footer>
-
-<!-- Floating Animation Styles -->
-<style>
+</footer><!-- Floating Animation Styles --><style>
 @keyframes floatAndTwinkleSlow { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-10px) scale(1.1); opacity: 0.4; } 50% { transform: translateY(-20px) scale(1.2); opacity: 0.6; } 75% { transform: translateY(-10px) scale(1.1); opacity: 0.4; } }
 @keyframes floatAndTwinkleMedium { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-15px) scale(1.1); opacity: 0.5; } 50% { transform: translateY(-30px) scale(1.2); opacity: 0.7; } 75% { transform: translateY(-15px) scale(1.1); opacity: 0.5; } }
 @keyframes floatAndTwinkleFast { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-20px) scale(1.1); opacity: 0.6; } 50% { transform: translateY(-40px) scale(1.2); opacity: 0.8; } 75% { transform: translateY(-20px) scale(1.1); opacity: 0.6; } }
@@ -68,16 +102,8 @@
 .animate-float-twinkle-slow { animation: floatAndTwinkleSlow 10s ease-in-out infinite; }
 .animate-float-twinkle-medium { animation: floatAndTwinkleMedium 7s ease-in-out infinite; }
 .animate-float-twinkle-fast { animation: floatAndTwinkleFast 5s ease-in-out infinite; }
-.animate-glow {
-  animation: glowBorder 2s ease-in-out infinite;
-}
-@keyframes glowBorder {
-  0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6); }
-  50% { box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8); }
-}
-.animate-sparkle {
-  animation: sparkleTwinkle 2s ease-in-out infinite;
-}
-</style>
-</body>
+.animate-glow { animation: glowBorder 2s ease-in-out infinite; }
+@keyframes glowBorder { 0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6); } 50% { box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8); } }
+.animate-sparkle { animation: sparkleTwinkle 2s ease-in-out infinite; }
+</style></body>
 </html>
