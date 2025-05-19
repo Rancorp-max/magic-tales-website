@@ -6,7 +6,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white text-gray-800"><!-- Hero Section --><section class="relative bg-gradient-to-r from-pink-400 via-pink-200 to-pink-400 py-24 overflow-hidden">
-  <!-- Hero Content Omitted for Brevity -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    <div class="absolute w-8 h-8 bg-white opacity-40 rounded-full animate-float-twinkle-slow" style="top: 20%; left: 15%;"></div>
+    <div class="absolute w-6 h-6 bg-white opacity-30 rounded-full animate-float-twinkle-medium" style="top: 50%; left: 80%;"></div>
+    <div class="absolute w-4 h-4 bg-white opacity-20 rounded-full animate-float-twinkle-fast" style="top: 70%; left: 25%;"></div>
+    <svg class="absolute w-6 h-6 text-white opacity-30 animate-float-twinkle-medium" style="top: 30%; left: 40%;" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"></path></svg>
+  </div>
+  <div class="container mx-auto flex flex-col items-center text-center relative z-10 px-6">
+    <h1 class="text-5xl font-bold mb-6 text-white leading-tight max-w-3xl">Bring Your Child's Adventures to Life!</h1>
+    <p class="text-xl mb-8 text-white max-w-2xl">Create a personalized storybook starring your child, full of magic, wonder, and adventure!</p>
+    <a href="customize.html" class="inline-block bg-white text-pink-500 hover:bg-pink-100 font-semibold px-10 py-4 rounded-full text-lg mb-12 shadow-lg">Create a Book</a>
+    <div class="w-full max-w-6xl">
+      <img src="./assets/hero-image.png" alt="Magical storybook illustration" class="w-full rounded-3xl shadow-2xl opacity-90">
+    </div>
+  </div>
 </section><!-- Join the Magic - Email Signup Section --><section class="bg-pink-50 py-20 px-6">
   <div class="max-w-xl mx-auto text-center">
     <h2 class="text-3xl font-bold text-pink-600 mb-4">Join the Magic</h2>
