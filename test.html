@@ -1,107 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MagicTales - Personalized Storybooks</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-gray-800">
-
-<!-- Header -->
-<header class="sticky top-0 bg-white shadow-md z-50">
-  <div class="container mx-auto flex items-center justify-between py-4 px-6">
-    <div class="text-2xl font-bold text-pink-500">MagicTales</div>
-    <nav class="hidden md:flex space-x-8 text-lg">
-      <a href="index.html" class="hover:text-pink-500">Home</a>
-      <a href="customize.html" class="hover:text-pink-500">Customize</a>
-      <a href="cart.html" class="hover:text-pink-500">Cart</a>
-    </nav>
-    <a href="customize.html" class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600">Start Your Book</a>
+<body class="bg-white text-gray-800"><!-- Hero Section --><section class="relative bg-gradient-to-r from-pink-400 via-pink-200 to-pink-400 py-24 overflow-hidden">
+  <!-- Hero Content Omitted for Brevity -->
+</section><!-- Join the Magic - Email Signup Section --><section class="bg-pink-50 py-20 px-6">
+  <div class="max-w-xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-pink-600 mb-4">Join the Magic</h2>
+    <p class="text-gray-700 mb-6">Be the first to know when our personalized storybooks go live! Sign up now and join the adventure.</p>
+    <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
+      <input type="email" name="email" required placeholder="Your email address"
+             class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-pink-400 w-full sm:w-auto">
+      <button type="submit"
+              class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-8 py-3 rounded-full transition">
+        Notify Me
+      </button>
+    </form>
+    <p class="text-sm text-gray-500 mt-4">No spam, just pure magic. Unsubscribe anytime.</p>
   </div>
-</header>
-
-<!-- Hero Section -->
-<section class="relative bg-gradient-to-b from-pink-100 via-pink-100 to-pink-300 py-24 overflow-hidden">
-  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-    <div class="absolute w-8 h-8 bg-white opacity-40 rounded-full animate-float-twinkle-slow" style="top: 20%; left: 15%;"></div>
-    <div class="absolute w-6 h-6 bg-white opacity-30 rounded-full animate-float-twinkle-medium" style="top: 50%; left: 80%;"></div>
-    <div class="absolute w-4 h-4 bg-white opacity-20 rounded-full animate-float-twinkle-fast" style="top: 70%; left: 25%;"></div>
-    <svg class="absolute w-6 h-6 text-white opacity-30 animate-float-twinkle-medium" style="top: 30%; left: 40%;" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"></path></svg>
-    <svg class="absolute w-4 h-4 text-white opacity-20 animate-float-twinkle-fast" style="top: 60%; left: 60%;" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"></path></svg>
-    <svg class="absolute w-5 h-5 text-white opacity-30 animate-float-twinkle-slow" style="top: 45%; left: 20%;" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"></path></svg>
-  </div>
-  <div class="container mx-auto flex flex-col items-center text-center relative z-10 px-6">
-    <h1 class="text-5xl font-bold mb-6 text-gray-800 leading-tight max-w-3xl">Bring Your Child's Adventures to Life!</h1>
-    <p class="text-xl mb-8 text-gray-600 max-w-2xl">Create a one-of-a-kind storybook starring your child, full of magic, wonder, and adventure!</p>
-    <a href="customize.html" class="inline-block bg-pink-500 hover:bg-pink-600 text-white text-lg font-semibold px-8 py-4 rounded-full mb-12">Create a Book</a>
-<div class="w-full">
-  <img src="./hero5.png" 
-       alt="Magical storybook illustration" 
-       class="w-full object-cover h-[600px] md:h-[700px] lg:h-[800px] rounded-3xl shadow-2xl opacity-90">
-</div>
-
-  </div>
-</section>
-
-<!-- How It Works Section -->
-<section id="howitworks" class="py-20 bg-pink-85">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-12">How It Works</h2>
-    <div class="grid md:grid-cols-3 gap-12">
-      <div>
-        <img src="./uploadphoto.png" alt="Upload Photo" class="mx-auto mb-6 w-32 h-32">
-        <h3 class="text-2xl font-semibold mb-2">Upload Photo</h3>
-        <p>Choose your child's best smile for the storybook!</p>
-      </div>
-      <div>
-        <img src="./bookimg.png" alt="Customize Story" class="mx-auto mb-6 w-32 h-32">
-        <h3 class="text-2xl font-semibold mb-2">Customize Story</h3>
-        <p>Add their name, dedication, and favorite things.</p>
-      </div>
-      <div>
-        <img src="./undraw_gift_re_qr17.svg" alt="Receive Magical Book" class="mx-auto mb-6 w-32 h-32">
-        <h3 class="text-2xl font-semibold mb-2">Receive Magical Book</h3>
-        <p>Get a beautiful, printed storybook delivered to your door!</p>
-      </div>
+</section><!-- Footer Section --><footer class="bg-white py-10 border-t mt-20">
+  <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
+    <div class="mb-4">
+      <span class="text-xl font-bold text-pink-500">MagicTales</span> © 2025. All Rights Reserved.
+    </div>
+    <div class="flex justify-center space-x-6">
+      <a href="#" class="hover:text-pink-500"><img src="https://img.icons8.com/ios-filled/24/facebook-new.png" alt="Facebook" class="inline-block"></a>
+      <a href="#" class="hover:text-pink-500"><img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram" class="inline-block"></a>
+      <a href="#" class="hover:text-pink-500"><img src="https://img.icons8.com/ios-filled/24/pinterest.png" alt="Pinterest" class="inline-block"></a>
     </div>
   </div>
-</section>
-
-<!-- Popular Categories Section -->
-<section id="categories" class="py-20 bg-pink-50">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-12">Popular Book Categories</h2>
-    <div class="grid md:grid-cols-4 gap-8">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <img src="https://img.icons8.com/color/96/trekking.png" alt="Adventures" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold">Adventures</h3>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <img src="https://img.icons8.com/color/96/birthday-cake.png" alt="Birthday Stories" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold">Birthday Stories</h3>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <img src="https://img.icons8.com/color/96/christmas-tree.png" alt="Holiday Specials" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold">Holiday Specials</h3>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <img src="https://img.icons8.com/color/96/sleeping-in-bed.png" alt="Bedtime Tales" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold">Bedtime Tales</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Floating Animation Styles -->
-<style>
+</footer><!-- Floating Animation Styles --><style>
 @keyframes floatAndTwinkleSlow { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-10px) scale(1.1); opacity: 0.4; } 50% { transform: translateY(-20px) scale(1.2); opacity: 0.6; } 75% { transform: translateY(-10px) scale(1.1); opacity: 0.4; } }
 @keyframes floatAndTwinkleMedium { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-15px) scale(1.1); opacity: 0.5; } 50% { transform: translateY(-30px) scale(1.2); opacity: 0.7; } 75% { transform: translateY(-15px) scale(1.1); opacity: 0.5; } }
 @keyframes floatAndTwinkleFast { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 25% { transform: translateY(-20px) scale(1.1); opacity: 0.6; } 50% { transform: translateY(-40px) scale(1.2); opacity: 0.8; } 75% { transform: translateY(-20px) scale(1.1); opacity: 0.6; } }
 .animate-float-twinkle-slow { animation: floatAndTwinkleSlow 10s ease-in-out infinite; }
 .animate-float-twinkle-medium { animation: floatAndTwinkleMedium 7s ease-in-out infinite; }
 .animate-float-twinkle-fast { animation: floatAndTwinkleFast 5s ease-in-out infinite; }
-</style>
-
-</body>
+</style></body>
 </html>
