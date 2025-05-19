@@ -1,227 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MagicTales - Personalized Storybooks</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+    @keyframes sparkleTwinkle {
+      0%, 100% { transform: scale(1); opacity: 0.8; filter: drop-shadow(0 0 3px gold); }
+      50% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 8px gold); }
+    }
+    .animate-sparkle {
+      animation: sparkleTwinkle 2s ease-in-out infinite;
+    }
+    @keyframes glowBorder {
+      0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6); }
+      50% { box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8); }
+    }
+    .animate-glow {
+      animation: glowBorder 2s ease-in-out infinite;
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800">
-
-  <!-- Header -->
-  <header class="sticky top-0 bg-white shadow-md z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <div class="text-2xl font-bold text-pink-500">MagicTales</div>
-      <nav class="hidden md:flex space-x-8 text-lg">
-        <a href="#" class="hover:text-pink-500">Home</a>
-        <a href="#howitworks" class="hover:text-pink-500">How It Works</a>
-        <a href="#categories" class="hover:text-pink-500">Shop Books</a>
-        <a href="#about" class="hover:text-pink-500">About</a>
-        <a href="#contact" class="hover:text-pink-500">Contact</a>
-        <a href="test.html" class="hover:text-pink-500">Contact</a>
-      </nav>
-      <a href="create.html" class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600">Start Your Book</a>
-      <a href="cart.html" class="hover:text-pink-500">Cart</a>
-    </div>
-  </header>
-
-<!-- Hero Section with Floating Magic -->
-<section class="relative bg-gradient-to-b from-pink-100 via-white to-pink-100 py-24 overflow-hidden">
-  
-  <!-- Floating Magic Elements -->
-<!-- Floating Magic Elements -->
-<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-  <!-- Floating Twinkling Stars -->
-  <div class="absolute w-10 h-10 bg-white opacity-70 rounded-full animate-float-slow animate-twinkle-slow" style="top: 20%; left: 10%;"></div>
-  <div class="absolute w-8 h-8 bg-white opacity-60 rounded-full animate-float-medium animate-twinkle-medium" style="top: 40%; left: 80%;"></div>
-  <div class="absolute w-6 h-6 bg-white opacity-50 rounded-full animate-float-fast animate-twinkle-fast" style="top: 60%; left: 30%;"></div>
-  <div class="absolute w-8 h-8 bg-white opacity-50 rounded-full animate-float-medium animate-twinkle-medium" style="top: 70%; left: 60%;"></div>
-</div>
-
-
-  <div class="container mx-auto flex flex-col items-center text-center relative z-10 px-6">
-    <!-- Headline -->
-    <h1 class="text-5xl font-bold mb-6 text-gray-800 leading-tight max-w-3xl">Bring Your Child's Adventures to Life!</h1>
-    <p class="text-xl mb-8 text-gray-600 max-w-2xl">Create a one-of-a-kind storybook starring your child, full of magic, wonder, and adventure!</p>
-    <a href="create.html" class="inline-block bg-pink-500 hover:bg-pink-600 text-white text-lg font-semibold px-8 py-4 rounded-full mb-12">Create a Book</a>
-
-    <!-- Hero Image -->
-    <div class="w-full max-w-4xl">
-      <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full object-cover opacity-90 rounded-3xl shadow-lg">
+<body class="bg-white text-gray-800"><!-- Hero Section --><section class="relative h-screen w-full overflow-hidden bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400">
+  <div class="absolute inset-0 z-0">
+    <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full h-full object-cover opacity-80" />
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70"></div>
+  </div>
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center w-full px-6">
+    <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto mb-4">Bring Your Child's Adventures to Life!</h1>
+    <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">Create a personalized storybook starring your child, full of magic, wonder, and adventure!</p>
+    <div class="max-w-xl mx-auto bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-xl p-6">
+      <h2 class="text-2xl font-bold text-sky-400 mb-2">Ready to Make Some Magic?</h2>
+      <p class="text-sky-500 mb-4 font-medium flex items-center justify-center gap-2">
+        <span class="inline-flex items-center gap-2 relative group">
+          <svg class="w-6 h-6 text-yellow-300 animate-sparkle cursor-help" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"/>
+          </svg>
+          <span>Sign up now and get <span class="font-bold text-sky-600">50% off</span> your first storybook!</span>
+          <span class="absolute bottom-full mb-2 w-56 text-sm text-white bg-sky-400 rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-white shadow-lg animate-glow">
+            You'll receive the discount code by email once we launch!
+          </span>
+        </span>
+      </p>
+      <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
+        <input type="email" name="email" required placeholder="Your email address" class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-300 w-full sm:w-auto">
+        <button type="submit" class="bg-sky-200 hover:bg-sky-300 text-gray-800 font-semibold px-6 py-3 rounded-full transition">Notify Me</button>
+      </form>
     </div>
   </div>
-<style>
-@keyframes floatSlow {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes floatMedium {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-30px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes floatFast {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-40px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes twinkleSlow {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.2); opacity: 0.5; }
-}
-@keyframes twinkleMedium {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.4); opacity: 0.6; }
-}
-@keyframes twinkleFast {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.6); opacity: 0.7; }
-}
-
-.animate-float-slow {
-  animation: floatSlow 8s ease-in-out infinite;
-}
-.animate-float-medium {
-  animation: floatMedium 6s ease-in-out infinite;
-}
-.animate-float-fast {
-  animation: floatFast 4s ease-in-out infinite;
-}
-.animate-twinkle-slow {
-  animation: twinkleSlow 7s ease-in-out infinite;
-}
-.animate-twinkle-medium {
-  animation: twinkleMedium 5s ease-in-out infinite;
-}
-.animate-twinkle-fast {
-  animation: twinkleFast 3s ease-in-out infinite;
-}
-</style>
-
-</section>
-
-<!-- Add this Tailwind Custom CSS for Floating + Twinkling -->
-<style>
-@keyframes floatSlow {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes floatMedium {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-30px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes floatFast {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-40px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes twinkleSlow {
-  0%, 100% { transform: scale(1) opacity(0.5); }
-  50% { transform: scale(1.2) opacity(0.8); }
-}
-@keyframes twinkleMedium {
-  0%, 100% { transform: scale(1) opacity(0.4); }
-  50% { transform: scale(1.3) opacity(0.7); }
-}
-@keyframes twinkleFast {
-  0%, 100% { transform: scale(1) opacity(0.3); }
-  50% { transform: scale(1.4) opacity(0.6); }
-}
-
-.animate-float-slow {
-  animation: floatSlow 8s ease-in-out infinite;
-}
-.animate-float-medium {
-  animation: floatMedium 6s ease-in-out infinite;
-}
-.animate-float-fast {
-  animation: floatFast 4s ease-in-out infinite;
-}
-.animate-twinkle-slow {
-  animation: twinkleSlow 7s ease-in-out infinite;
-}
-.animate-twinkle-medium {
-  animation: twinkleMedium 5s ease-in-out infinite;
-}
-.animate-twinkle-fast {
-  animation: twinkleFast 3s ease-in-out infinite;
-}
-</style>
-
-
-
-<!-- How It Works Section -->
-<section id="howitworks" class="py-20 bg-white">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-12">How It Works</h2>
+</section><!-- How It Works Section --><section class="py-20 bg-sky-50 text-center">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-sky-600 mb-12 animate-on-scroll">How It Works</h2>
     <div class="grid md:grid-cols-3 gap-12">
-
-      <!-- Step 1: Upload Photo -->
-      <div>
-        <img src="uploadphoto.png" alt="Upload Photo" class="mx-auto mb-6 w-48 h-48">
-        <h3 class="text-2xl font-semibold mb-2">Upload Photo</h3>
-        <p>Choose your child's best smile for the storybook!</p>
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/add-image.png" alt="Upload" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">1. Upload Your Photo</h3>
+        <p class="text-gray-600">Choose a fun photo of your child — this will be transformed into a magical storybook character!</p>
       </div>
-
-      <!-- Step 2: Customize Story -->
-      <div>
-        <img src="./bookimg.png" alt="Customize Story" class="mx-auto mb-6 w-48 h-48">
-        <h3 class="text-2xl font-semibold mb-2">Customize Story</h3>
-        <p>Add their name, dedication, and favorite things.</p>
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/open-book--v2.png" alt="Customize" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">2. Watch the Magic</h3>
+        <p class="text-gray-600">Our AI creates stunning illustrations and brings your child’s likeness into every page of the story.</p>
       </div>
-
-      <!-- Step 3: Receive Magical Book -->
-      <div>
-        <img src="undraw_gift_re_qr17.svg" alt="Receive Magical Book" class="mx-auto mb-6 w-48 h-48">
-        <h3 class="text-2xl font-semibold mb-2">Receive Magical Book</h3>
-        <p>Get a beautiful, printed storybook delivered to your door!</p>
+      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
+        <img src="https://img.icons8.com/color/96/book-shelf.png" alt="Delivery" class="mx-auto mb-4">
+        <h3 class="text-2xl font-semibold mb-2">3. Receive Your Book</h3>
+        <p class="text-gray-600">Get your beautifully printed, personalized book delivered to your door – a keepsake to treasure forever.</p>
       </div>
-
     </div>
   </div>
-</section>
-
-
-
-  <!-- Categories Section -->
-  <section id="categories" class="py-20 bg-pink-50">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-12">Popular Book Categories</h2>
-      <div class="grid md:grid-cols-4 gap-8">
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <img src="https://img.icons8.com/color/96/trekking.png" alt="Adventures" class="mx-auto mb-4">
-          <h3 class="text-2xl font-semibold">Adventures</h3>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <img src="https://img.icons8.com/color/96/birthday-cake.png" alt="Birthday Stories" class="mx-auto mb-4">
-          <h3 class="text-2xl font-semibold">Birthday Stories</h3>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <img src="https://img.icons8.com/color/96/christmas-tree.png" alt="Holiday Specials" class="mx-auto mb-4">
-          <h3 class="text-2xl font-semibold">Holiday Specials</h3>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <img src="https://img.icons8.com/color/96/sleeping-in-bed.png" alt="Bedtime Tales" class="mx-auto mb-4">
-          <h3 class="text-2xl font-semibold">Bedtime Tales</h3>
-        </div>
-      </div>
+</section><!-- Book Categories Section --><section class="py-20 bg-white text-center relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+    <svg class="absolute top-10 left-10 w-32 h-32 text-sky-100" fill="currentColor"><circle cx="12" cy="12" r="12"/></svg>
+    <svg class="absolute bottom-10 right-20 w-24 h-24 text-sky-100" fill="currentColor"><rect width="24" height="24" rx="12"/></svg>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <h2 class="text-4xl font-bold text-sky-600 mb-12 animate-on-scroll">Explore Book Categories</h2>
+    <div class="grid md:grid-cols-4 gap-8">
+      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
+        <img src="https://img.icons8.com/color/96/trekking.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <h3 class="text-xl font-semibold text-sky-700">Adventures</h3>
+      </a>
+      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
+        <img src="https://img.icons8.com/color/96/birthday-cake.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <h3 class="text-xl font-semibold text-sky-700">Birthday Stories</h3>
+      </a>
+      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
+        <img src="https://img.icons8.com/color/96/christmas-tree.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <h3 class="text-xl font-semibold text-sky-700">Holiday Specials</h3>
+      </a>
+      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
+        <img src="https://img.icons8.com/color/96/sleeping-in-bed.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <h3 class="text-xl font-semibold text-sky-700">Bedtime Tales</h3>
+      </a>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-white py-10 border-t">
-    <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
-      © 2025 MagicTales. All Rights Reserved.
-      <div class="flex justify-center space-x-4 mt-4">
-        <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook-new.png" alt="Facebook"></a>
-        <a href="#"><img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram"></a>
-        <a href="#"><img src="https://img.icons8.com/ios-filled/24/pinterest.png" alt="Pinterest"></a>
-      </div>
+  </div>
+</section><!-- Footer Section --><footer class="bg-white py-10 border-t mt-20">
+  <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
+    <div class="mb-4">
+      <span class="text-xl font-bold text-blue-500">MagicTales</span> © 2025. All Rights Reserved.
     </div>
-  </footer>
-
-</body>
+    <div class="flex justify-center space-x-6">
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook-new.png" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram"></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/pinterest.png" alt="Pinterest"></a>
+    </div>
+  </div>
+</footer></body>
 </html>
