@@ -36,12 +36,8 @@
 </header>
 
 <!-- Hero Section -->
-<section class="relative text-center py-24 px-6">
-    <div class="absolute inset-0 z-0">
-    <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full h-full object-cover opacity-80" />
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70"></div>
-  </div>
-  <div class="max-w-3xl mx-auto">
+<section class="relative text-center py-24 px-6 bg-cover bg-center bg-no-repeat" style="background-image: url('./hero-image.png');">
+  <div class="max-w-3xl mx-auto bg-white/70 backdrop-blur-md p-8 rounded-3xl">
     <h1 class="text-5xl font-bold text-sky-700 leading-tight mb-4">Personalized Storybooks That Spark Imagination</h1>
     <p class="text-lg text-gray-600 mb-6">Upload a photo, choose a theme, and let us turn your child into the star of their very own adventure.</p>
     <a href="#categories" class="inline-block bg-sky-500 text-white px-8 py-4 rounded-full text-lg shadow-lg hover:bg-sky-600 transition">Start Your Story</a>
@@ -95,16 +91,16 @@ const categories = [
 ];
 
 const icons = {
-  "Potty Training": "https://img.icons8.com/color/96/toilet-training.png",
+  "Potty Training": "https://img.icons8.com/fluency/96/toilet.png",
   "Adventure": "https://img.icons8.com/color/96/trekking.png",
   "Bedtime Routine": "https://img.icons8.com/color/96/sleeping-in-bed.png",
   "Learning ABCs": "https://img.icons8.com/color/96/abc.png",
   "Space Exploration": "https://img.icons8.com/color/96/rocket.png",
-  "Magic and Fantasy": "https://img.icons8.com/color/96/magic-wand.png",
+  "Magic and Fantasy": "https://img.icons8.com/fluency/96/magic.png",
   "Healthy Eating": "https://img.icons8.com/color/96/salad.png",
   "Visiting the Dentist": "https://img.icons8.com/color/96/tooth.png",
   "Brushing Teeth": "https://img.icons8.com/color/96/toothbrush.png",
-  "Counting and Numbers": "https://img.icons8.com/color/96/numbers.png"
+  "Counting and Numbers": "https://img.icons8.com/fluency/96/123.png"
 };
 
 const grid = document.getElementById("categoryGrid");
