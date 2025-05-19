@@ -36,8 +36,10 @@
   </div>
 </header><!-- Customization Form Section --><section class="py-20">
   <div class="container mx-auto px-6 max-w-4xl glass rounded-3xl shadow-2xl p-10">
-    <h2 class="text-4xl font-bold mb-10 text-center text-sky-500 tracking-tight">Create a Magical Storybook</h2>
-    <form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-12"><!-- Step 1 -->
+    <h2 class="text-4xl font-bold mb-4 text-center text-sky-500 tracking-tight">Create a Magical Storybook</h2>
+    <p id="categoryDisplay" class="text-lg text-center text-sky-600 mb-8"></p><form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-12">
+
+  <!-- Step 1 -->
   <div>
     <div class="flex items-center gap-4 mb-4">
       <img src="https://img.icons8.com/color/48/image-file.png" class="w-10 h-10">
@@ -50,10 +52,11 @@
       </label>
       <img id="photo-preview" class="hidden mt-4 w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg">
       <p class="text-sm text-gray-500 mt-2">Use a clear, front-facing photo</p>
+      <p class="text-xs text-gray-400 mt-1">Your photo is used only to generate the storybook avatar and will be securely deleted afterward.</p>
+    </div>
+  </div>
 
-<p class="text-xs text-gray-400 mt-1">Your photo is used only to generate the storybook avatar and will be securely deleted afterward.</p>
-        </div>
-      </div><!-- Step 2 -->
+  <!-- Step 2 -->
   <div>
     <div class="flex items-center gap-4 mb-4">
       <img src="https://img.icons8.com/color/48/conference-background-selected.png" class="w-10 h-10">
@@ -129,6 +132,8 @@ const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
 const previewName = document.getElementById('preview-name');
+const categoryDisplay = document.getElementById('categoryDisplay');
+
 photoUpload.addEventListener('change', function () {
   const file = this.files[0];
   if (file) {
@@ -142,9 +147,17 @@ photoUpload.addEventListener('change', function () {
     reader.readAsDataURL(file);
   }
 });
+
 function updatePreviewName() {
   const nameInput = document.getElementById('child-name').value;
   previewName.textContent = nameInput || "Your Child's Name";
+}
+
+// Get category from URL
+const urlParams = new URLSearchParams(window.location.search);
+const category = urlParams.get('category');
+if (category) {
+  categoryDisplay.textContent = `Selected Category: ${decodeURIComponent(category)}`;
 }
 </script></body>
 </html>
