@@ -136,7 +136,6 @@ const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
 const previewName = document.getElementById('preview-name');
-const categoryDisplay = document.getElementById('categoryDisplay');
 
 photoUpload.addEventListener('change', function () {
   const file = this.files[0];
@@ -157,10 +156,10 @@ function updatePreviewName() {
   previewName.textContent = nameInput || "Your Child's Name";
 }
 
-// Get category from URL
-const urlParams = new URLSearchParams(window.location.search);
-const category = urlParams.get('category');
-const categoryDisplayText = document.querySelector('#categoryDisplay p');
+// Category Handling
+const categoryParams = new URLSearchParams(window.location.search);
+const selectedCategory = categoryParams.get('category');
+const categoryLabel = document.querySelector('#categoryDisplay p');
 const categoryIcon = document.getElementById('categoryIcon');
 
 const categoryIcons = {
@@ -216,14 +215,13 @@ const categoryIcons = {
   "Imagination and Creativity Stories": "https://img.icons8.com/color/96/light-on.png"
 };
 
-if (category) {
-  const decoded = decodeURIComponent(category);
-  categoryDisplayText.textContent = `Selected Category: ${decoded}`;
-  if (categoryIcons[decoded]) {
-    categoryIcon.src = categoryIcons[decoded];
+if (selectedCategory) {
+  const decodedCategory = decodeURIComponent(selectedCategory);
+  if (categoryLabel) categoryLabel.textContent = `Selected Category: ${decodedCategory}`;
+  if (categoryIcon && categoryIcons[decodedCategory]) {
+    categoryIcon.src = categoryIcons[decodedCategory];
     categoryIcon.classList.remove("hidden");
   }
-}`;
 }
 </script></body>
 </html>
