@@ -90,32 +90,60 @@
       </div>
     </div>
   </div>
-</section><!-- Book Categories Section --><section class="py-20 bg-white text-center relative overflow-hidden">
-  <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-    <svg class="absolute top-10 left-10 w-32 h-32 text-sky-100" fill="currentColor"><circle cx="12" cy="12" r="12"/></svg>
-    <svg class="absolute bottom-10 right-20 w-24 h-24 text-sky-100" fill="currentColor"><rect width="24" height="24" rx="12"/></svg>
-  </div>
+<!-- Book Categories Section --><section class="py-20 bg-white text-center relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-6 relative z-10">
-    <h2 class="text-4xl font-bold text-sky-600 mb-12 animate-on-scroll">Explore Book Categories</h2>
-    <div class="grid md:grid-cols-4 gap-8">
-      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
-        <img src="https://img.icons8.com/color/96/trekking.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-        <h3 class="text-xl font-semibold text-sky-700">Adventures</h3>
-      </a>
-      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
-        <img src="https://img.icons8.com/color/96/birthday-cake.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-        <h3 class="text-xl font-semibold text-sky-700">Birthday Stories</h3>
-      </a>
-      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
-        <img src="https://img.icons8.com/color/96/christmas-tree.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-        <h3 class="text-xl font-semibold text-sky-700">Holiday Specials</h3>
-      </a>
-      <a href="create.html" class="bg-sky-100 hover:bg-sky-200 rounded-xl shadow-md p-6 transition transform hover:-translate-y-2 hover:shadow-xl block animate-on-scroll group">
-        <img src="https://img.icons8.com/color/96/sleeping-in-bed.png" class="mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-        <h3 class="text-xl font-semibold text-sky-700">Bedtime Tales</h3>
-      </a>
-    </div>
+    <h2 class="text-4xl font-bold text-sky-600 mb-8 animate-on-scroll">Explore Book Categories</h2><!-- Search Input -->
+<div class="mb-12">
+  <input type="text" id="categorySearch" placeholder="Search categories..." class="w-full max-w-lg mx-auto px-6 py-3 border border-sky-200 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"/>
+</div>
+
+<!-- Categories Grid -->
+<div id="categoryGrid" class="grid md:grid-cols-4 gap-6">
+  <!-- Category items will be inserted by script -->
+</div>
+
   </div>
+</section><script>
+  const categories = [
+    "Potty Training", "Adventure", "Get to Know Names in the Family", "Get to Know the Neighborhood",
+    "Bedtime Routine", "First Day of School", "Learning ABCs", "Counting and Numbers",
+    "Healthy Eating", "Brushing Teeth", "Manners and Etiquette", "Sharing and Kindness",
+    "Making New Friends", "Dealing with Emotions", "Going to the Doctor", "Visiting the Dentist",
+    "Exploring Nature", "Animal Adventures", "Traveling and Exploring New Places", "Learning Colors and Shapes",
+    "Music and Rhythm", "Sports and Outdoor Play", "Building and Construction", "Superhero Adventures",
+    "Magic and Fantasy", "Science Experiments at Home", "Weather and Seasons", "Under the Sea",
+    "Space Exploration", "Dinosaurs and Prehistoric Times", "Fairy Tales and Legends", "Holiday Celebrations",
+    "Helping Around the House", "Camping and Outdoor Adventures", "Gardening and Plants",
+    "Learning About Different Cultures", "Transportation and Vehicles", "Story of My Birth",
+    "Fun with Pets", "Birthday Party Planning", "Baking and Cooking with Family", "Art and Craft Projects",
+    "Learning about Jobs and Careers", "Visiting Grandparents", "Exploring the Farm",
+    "Zoo and Safari Adventures", "Aquarium and Ocean Life", "Mindfulness and Relaxation",
+    "Going to the Library", "Imagination and Creativity Stories"
+  ];
+
+  const grid = document.getElementById("categoryGrid");
+  const search = document.getElementById("categorySearch");
+
+  function renderCategories(filter = "") {
+    grid.innerHTML = "";
+    const filtered = categories.filter(cat => cat.toLowerCase().includes(filter.toLowerCase()));
+    filtered.forEach(cat => {
+      const item = document.createElement("a");
+      item.href = "create.html";
+      item.className = "bg-sky-100 hover:bg-sky-200 p-4 rounded-xl shadow transition block animate-on-scroll";
+      item.innerHTML = `
+        <div class="text-center">
+          <img src="https://img.icons8.com/color/64/book.png" alt="${cat}" class="mx-auto mb-3"/>
+          <h3 class="text-lg font-semibold text-sky-700">${cat}</h3>
+        </div>
+      `;
+      grid.appendChild(item);
+    });
+  }
+
+  search.addEventListener("input", () => renderCategories(search.value));
+  document.addEventListener("DOMContentLoaded", () => renderCategories());
+</script>
 </section><!-- Footer Section --><footer class="bg-white py-10 border-t mt-20">
   <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
     <div class="mb-4">
