@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,15 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .glass {
-      background-color: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(16px);
-    }
-    .form-label {
-      font-size: 0.95rem;
-      letter-spacing: 0.03em;
-    }
-    .form-input {
-      transition: all 0.2s;
-    }
-    .form-input:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-sky-50 to-sky-100 min-h-screen text-gray-800"><!-- Header --><header class="sticky top-0 bg-white shadow-md z-50">
+<body class="bg-gradient-to-br from-sky-50 to-sky-100 min-h-screen text-gray-800">
+
+<!-- Header -->
+<header class="sticky top-0 bg-white shadow-md z-50">
   <div class="container mx-auto flex items-center justify-between py-4 px-6">
     <div class="text-2xl font-bold text-sky-500 tracking-wide">MagicTales</div>
     <nav class="hidden md:flex space-x-8 text-lg">
@@ -34,104 +27,84 @@
       <a href="/#categories" class="hover:text-sky-500">Shop Books</a>
     </nav>
   </div>
-</header><!-- Customization Form Section --><section class="py-20">
-  <div class="container mx-auto px-6 max-w-4xl glass rounded-3xl shadow-2xl p-10">
-    <h2 class="text-4xl font-bold mb-4 text-center text-sky-500 tracking-tight">Create a Magical Storybook</h2>
-    <div id="categoryDisplay" class="flex flex-col items-center justify-center mb-8">
-  <img id="categoryIcon" src="" alt="Category Icon" class="w-16 h-16 mb-2 hidden" />
-  <p class="text-lg text-sky-600"></p>
-  <a href="/index.html#categories" class="mt-2 text-sm text-sky-500 hover:underline">Choose a different category</a>
-</div><form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-12">
+</header>
 
-  <!-- Step 1 -->
-  <div>
-    <div class="flex items-center gap-4 mb-4">
-      <img src="https://img.icons8.com/color/48/image-file.png" class="w-10 h-10">
-      <h3 class="text-2xl font-semibold text-gray-700">1. Upload Your Child's Photo</h3>
-    </div>
-    <div class="border-2 border-dashed border-sky-300 p-6 rounded-xl bg-white/60 flex flex-col items-center">
-      <input type="file" accept="image/*" class="hidden" id="photo-upload">
-      <label for="photo-upload" class="cursor-pointer text-sky-600 font-medium hover:underline">
-        Click to upload a photo
-      </label>
-      <img id="photo-preview" class="hidden mt-4 w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg">
-      <p class="text-sm text-gray-500 mt-2">Use a clear, front-facing photo</p>
-      <p class="text-xs text-gray-400 mt-1">Your photo is used only to generate the storybook avatar and will be securely deleted afterward.</p>
-    </div>
-  </div>
+<!-- Customization Section -->
+<section class="py-20">
+  <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-2 gap-12 items-start">
 
-  <!-- Step 2 -->
-  <div>
-    <div class="flex items-center gap-4 mb-4">
-      <img src="https://img.icons8.com/color/48/conference-background-selected.png" class="w-10 h-10">
-      <h3 class="text-2xl font-semibold text-gray-700">2. Tell Us About Your Child</h3>
-    </div>
-    <div class="grid gap-6">
-      <div>
-        <label class="form-label block mb-2">Child's Name</label>
-        <input name="name" id="child-name" placeholder="Ella, Jayden, etc." class="form-input w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()">
+    <!-- Form Panel -->
+    <div class="glass rounded-3xl shadow-xl p-8">
+      <div class="flex flex-col items-center text-center mb-6">
+        <img id="categoryIcon" src="" alt="Category Icon" class="w-16 h-16 hidden mb-2" />
+        <p class="text-xl text-sky-600 font-semibold" id="categoryText"></p>
+        <a href="/index.html#categories" class="text-sm text-sky-500 hover:underline mt-1">Choose a different category</a>
       </div>
-      <div>
-        <label class="form-label block mb-2">Age</label>
-        <input name="age" type="number" min="0" placeholder="4" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
-      </div>
-      <div>
-        <label class="form-label block mb-2">Favorite Color</label>
-        <input name="favoriteColor" type="text" placeholder="Blue, pink, yellow..." class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
-      </div>
-      <div>
-        <label class="form-label block mb-2">Dedication Message</label>
-        <textarea name="message" placeholder="Happy Birthday! We love you!" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3" rows="3"></textarea>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
+
+      <form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-8">
         <div>
-          <label class="form-label block mb-2">Skin Tone</label>
-          <select name="skinTone" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
-            <option>Light</option>
-            <option>Medium</option>
-            <option>Dark</option>
-          </select>
+          <label class="block mb-2 font-medium">Upload a Photo</label>
+          <div class="border-2 border-dashed border-sky-300 rounded-xl bg-white/60 p-6 text-center">
+            <input type="file" accept="image/*" id="photo-upload" class="hidden">
+            <label for="photo-upload" class="cursor-pointer text-sky-600 font-medium hover:underline">Click to upload</label>
+            <img id="photo-preview" class="hidden mt-4 w-24 h-24 rounded-full object-cover mx-auto">
+            <p class="text-xs text-gray-500 mt-2">Used only to generate an avatar. Deleted after creation.</p>
+          </div>
         </div>
-        <div>
-          <label class="form-label block mb-2">Hair Style</label>
-          <select name="hairStyle" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
-            <option>Short</option>
-            <option>Long</option>
-            <option>Curly</option>
-            <option>Straight</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Preview -->
-  <div>
-    <div class="flex items-center gap-4 mb-4">
-      <img src="https://img.icons8.com/color/48/preview-pane.png" class="w-10 h-10">
-      <h3 class="text-2xl font-semibold text-gray-700">Live Book Preview ✨</h3>
+        <div class="grid grid-cols-1 gap-6">
+          <div>
+            <label class="block mb-1">Child's Name</label>
+            <input name="name" id="child-name" placeholder="Ella, Jayden, etc." class="w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()">
+          </div>
+          <div>
+            <label class="block mb-1">Age</label>
+            <input name="age" type="number" min="0" placeholder="4" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+          </div>
+          <div>
+            <label class="block mb-1">Favorite Color</label>
+            <input name="favoriteColor" type="text" placeholder="Blue, pink, yellow..." class="w-full border border-gray-300 rounded-xl px-4 py-3">
+          </div>
+          <div>
+            <label class="block mb-1">Dedication Message</label>
+            <textarea name="message" placeholder="Happy Birthday! We love you!" rows="2" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-1">Skin Tone</label>
+              <select name="skinTone" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+                <option>Light</option><option>Medium</option><option>Dark</option>
+              </select>
+            </div>
+            <div>
+              <label class="block mb-1">Hair Style</label>
+              <select name="hairStyle" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+                <option>Short</option><option>Long</option><option>Curly</option><option>Straight</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 text-center">
+          <p class="text-base text-sky-700 font-medium mb-2">Want 50% off your first storybook?</p>
+          <input name="email" type="email" required placeholder="Enter your email" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
+          <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-3 rounded-full shadow-md">Get My Discount</button>
+        </div>
+      </form>
     </div>
-    <div class="bg-white/70 p-6 rounded-xl text-center shadow">
-      <div class="w-32 h-32 bg-white rounded-full shadow-md mx-auto overflow-hidden mb-4">
+
+    <!-- Live Preview Panel -->
+    <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center">
+      <h3 class="text-2xl font-bold text-sky-600 mb-4">Live Book Preview ✨</h3>
+      <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-4 overflow-hidden">
         <img id="preview-image" class="hidden w-full h-full object-cover">
       </div>
       <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
     </div>
   </div>
+</section>
 
-  <!-- Email Submission -->
-  <div class="text-center">
-    <p class="text-lg text-sky-600 font-medium mb-4">Enter your email to receive <strong>50% off</strong> when we launch!</p>
-    <input name="email" type="email" placeholder="you@example.com" required class="form-input border border-gray-300 rounded-full px-5 py-3 w-full max-w-md mb-4">
-    <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-10 py-3 rounded-full shadow-lg transition-all">
-      Get My Discount
-    </button>
-  </div>
-
-</form>
-
-  </div>
-</section><script>
+<script>
 const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
@@ -156,72 +129,33 @@ function updatePreviewName() {
   previewName.textContent = nameInput || "Your Child's Name";
 }
 
-// Category Handling
 const categoryParams = new URLSearchParams(window.location.search);
 const selectedCategory = categoryParams.get('category');
-const categoryLabel = document.querySelector('#categoryDisplay p');
+const categoryLabel = document.getElementById('categoryText');
 const categoryIcon = document.getElementById('categoryIcon');
 
 const categoryIcons = {
-  "Potty Training": "https://img.icons8.com/color/96/toilet-training.png",
   "Adventure": "https://img.icons8.com/color/96/trekking.png",
-  "Get to Know Names in the Family": "https://img.icons8.com/color/96/family.png",
-  "Get to Know the Neighborhood": "https://img.icons8.com/color/96/city.png",
+  "Magic and Fantasy": "https://img.icons8.com/color/96/magic-wand.png",
   "Bedtime Routine": "https://img.icons8.com/color/96/sleeping-in-bed.png",
   "First Day of School": "https://img.icons8.com/color/96/school.png",
   "Learning ABCs": "https://img.icons8.com/color/96/abc.png",
   "Counting and Numbers": "https://img.icons8.com/color/96/numbers.png",
   "Healthy Eating": "https://img.icons8.com/color/96/salad.png",
   "Brushing Teeth": "https://img.icons8.com/color/96/toothbrush.png",
-  "Manners and Etiquette": "https://img.icons8.com/color/96/handshake.png",
-  "Sharing and Kindness": "https://img.icons8.com/color/96/gift.png",
-  "Making New Friends": "https://img.icons8.com/color/96/conference-call.png",
   "Dealing with Emotions": "https://img.icons8.com/color/96/happy--v1.png",
-  "Going to the Doctor": "https://img.icons8.com/color/96/stethoscope.png",
-  "Visiting the Dentist": "https://img.icons8.com/color/96/tooth.png",
-  "Exploring Nature": "https://img.icons8.com/color/96/forest.png",
-  "Animal Adventures": "https://img.icons8.com/color/96/lion.png",
-  "Traveling and Exploring New Places": "https://img.icons8.com/color/96/globe.png",
-  "Learning Colors and Shapes": "https://img.icons8.com/color/96/geometry.png",
-  "Music and Rhythm": "https://img.icons8.com/color/96/musical-notes.png",
-  "Sports and Outdoor Play": "https://img.icons8.com/color/96/soccer-ball.png",
-  "Building and Construction": "https://img.icons8.com/color/96/crane.png",
-  "Superhero Adventures": "https://img.icons8.com/color/96/superhero.png",
-  "Magic and Fantasy": "https://img.icons8.com/color/96/magic-wand.png",
-  "Science Experiments at Home": "https://img.icons8.com/color/96/test-tube.png",
-  "Weather and Seasons": "https://img.icons8.com/color/96/sun.png",
-  "Under the Sea": "https://img.icons8.com/color/96/dolphin.png",
-  "Space Exploration": "https://img.icons8.com/color/96/rocket.png",
-  "Dinosaurs and Prehistoric Times": "https://img.icons8.com/color/96/dinosaur.png",
-  "Fairy Tales and Legends": "https://img.icons8.com/color/96/fairy.png",
-  "Holiday Celebrations": "https://img.icons8.com/color/96/christmas-star.png",
-  "Helping Around the House": "https://img.icons8.com/color/96/vacuum-cleaner.png",
-  "Camping and Outdoor Adventures": "https://img.icons8.com/color/96/camping-tent.png",
-  "Gardening and Plants": "https://img.icons8.com/color/96/gardening.png",
-  "Learning About Different Cultures": "https://img.icons8.com/color/96/earth-planet.png",
-  "Transportation and Vehicles": "https://img.icons8.com/color/96/car--v1.png",
-  "Story of My Birth": "https://img.icons8.com/color/96/baby.png",
-  "Fun with Pets": "https://img.icons8.com/color/96/dog.png",
-  "Birthday Party Planning": "https://img.icons8.com/color/96/birthday-cake.png",
-  "Baking and Cooking with Family": "https://img.icons8.com/color/96/bread.png",
-  "Art and Craft Projects": "https://img.icons8.com/color/96/paint-palette.png",
-  "Learning about Jobs and Careers": "https://img.icons8.com/color/96/briefcase.png",
-  "Visiting Grandparents": "https://img.icons8.com/color/96/elderly-person.png",
-  "Exploring the Farm": "https://img.icons8.com/color/96/farm.png",
-  "Zoo and Safari Adventures": "https://img.icons8.com/color/96/zebra.png",
-  "Aquarium and Ocean Life": "https://img.icons8.com/color/96/fish.png",
-  "Mindfulness and Relaxation": "https://img.icons8.com/color/96/lotus-position.png",
-  "Going to the Library": "https://img.icons8.com/color/96/books.png",
-  "Imagination and Creativity Stories": "https://img.icons8.com/color/96/light-on.png"
+  "Space Exploration": "https://img.icons8.com/color/96/rocket.png"
 };
 
 if (selectedCategory) {
-  const decodedCategory = decodeURIComponent(selectedCategory);
-  if (categoryLabel) categoryLabel.textContent = `Selected Category: ${decodedCategory}`;
-  if (categoryIcon && categoryIcons[decodedCategory]) {
-    categoryIcon.src = categoryIcons[decodedCategory];
+  const decoded = decodeURIComponent(selectedCategory);
+  categoryLabel.textContent = `Selected Category: ${decoded}`;
+  if (categoryIcons[decoded]) {
+    categoryIcon.src = categoryIcons[decoded];
     categoryIcon.classList.remove("hidden");
   }
 }
-</script></body>
+</script>
+
+</body>
 </html>
