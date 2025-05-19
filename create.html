@@ -1,117 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customize Your Storybook - MagicTales</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body class="bg-pink-50 min-h-screen text-gray-800">
-
-<!-- Header -->
-<header class="sticky top-0 bg-white shadow-md z-50">
+<body class="bg-sky-50 min-h-screen text-gray-800"><!-- Header --><header class="sticky top-0 bg-white shadow-md z-50">
   <div class="container mx-auto flex items-center justify-between py-4 px-6">
-    <div class="text-2xl font-bold text-pink-500">MagicTales</div>
+    <div class="text-2xl font-bold text-blue-500">MagicTales</div>
     <nav class="hidden md:flex space-x-8 text-lg">
-      <a href="/" class="hover:text-pink-500">Home</a>
-      <a href="/#howitworks" class="hover:text-pink-500">How It Works</a>
-      <a href="/#categories" class="hover:text-pink-500">Shop Books</a>
+      <a href="/" class="hover:text-blue-500">Home</a>
+      <a href="/#howitworks" class="hover:text-blue-500">How It Works</a>
+      <a href="/#categories" class="hover:text-blue-500">Shop Books</a>
     </nav>
   </div>
-</header>
-
-<!-- Main Customization Section -->
-<section class="py-16">
+</header><!-- Main Customization Section --><section class="py-16">
   <div class="container mx-auto px-6 max-w-4xl bg-white rounded-2xl shadow-lg p-10">
+    <h2 class="text-4xl font-bold mb-10 text-center text-blue-500">Customize Your Book</h2><form class="space-y-12" id="customization-form">
 
-    <h2 class="text-4xl font-bold mb-10 text-center text-pink-500">Customize Your Book</h2>
+  <!-- Step 1: Upload Photo -->
+  <div>
+    <h3 class="text-2xl font-semibold mb-4">1. Upload Your Child's Photo</h3>
+    <div class="border-2 border-dashed border-blue-300 p-6 rounded-lg flex flex-col items-center justify-center text-center bg-blue-50 relative">
+      <input type="file" accept="image/*" class="hidden" id="photo-upload">
+      <label for="photo-upload" class="cursor-pointer text-blue-500 font-semibold text-lg">
+        Click to upload a photo
+      </label>
+      <img id="photo-preview" class="hidden mt-4 w-40 h-40 object-cover rounded-full shadow-md">
+      <p class="text-sm text-gray-500 mt-2">Best with clear, front-facing photos</p>
+    </div>
+  </div>
 
-    <form class="space-y-12" id="customization-form">
-
-      <!-- Step 1: Upload Photo -->
+  <!-- Step 2: Child Information -->
+  <div>
+    <h3 class="text-2xl font-semibold mb-4">2. Tell Us About Your Child</h3>
+    <div class="space-y-6">
       <div>
-        <h3 class="text-2xl font-semibold mb-4">1. Upload Your Child's Photo</h3>
-        <div class="border-2 border-dashed border-pink-300 p-6 rounded-lg flex flex-col items-center justify-center text-center bg-pink-50 relative">
-          <input type="file" accept="image/*" class="hidden" id="photo-upload">
-          <label for="photo-upload" class="cursor-pointer text-pink-500 font-semibold text-lg">
-            Click to upload a photo
-          </label>
-          <img id="photo-preview" class="hidden mt-4 w-40 h-40 object-cover rounded-full shadow-md">
-          <p class="text-sm text-gray-500 mt-2">Best with clear, front-facing photos</p>
-        </div>
+        <label class="block mb-2 font-semibold">Child's Name</label>
+        <input type="text" id="child-name" placeholder="Ella, Jayden, etc." class="w-full border border-gray-300 rounded-lg p-3" oninput="updatePreviewName()">
       </div>
-
-      <!-- Step 2: Child Information -->
       <div>
-        <h3 class="text-2xl font-semibold mb-4">2. Tell Us About Your Child</h3>
-        <div class="space-y-6">
-          <div>
-            <label class="block mb-2 font-semibold">Child's Name</label>
-            <input type="text" id="child-name" placeholder="Ella, Jayden, etc." class="w-full border border-gray-300 rounded-lg p-3" oninput="updatePreviewName()">
-          </div>
-          <div>
-            <label class="block mb-2 font-semibold">Child's Age</label>
-            <input type="number" min="0" placeholder="4" class="w-full border border-gray-300 rounded-lg p-3">
-          </div>
-          <div>
-            <label class="block mb-2 font-semibold">Favorite Color</label>
-            <input type="text" placeholder="Blue, pink, yellow..." class="w-full border border-gray-300 rounded-lg p-3">
-          </div>
-          <div>
-            <label class="block mb-2 font-semibold">Dedication Message (Optional)</label>
-            <textarea placeholder="Happy Birthday! We love you!" class="w-full border border-gray-300 rounded-lg p-3" rows="3"></textarea>
-          </div>
+        <label class="block mb-2 font-semibold">Child's Age</label>
+        <input type="number" min="0" placeholder="4" class="w-full border border-gray-300 rounded-lg p-3">
+      </div>
+      <div>
+        <label class="block mb-2 font-semibold">Favorite Color</label>
+        <input type="text" placeholder="Blue, pink, yellow..." class="w-full border border-gray-300 rounded-lg p-3">
+      </div>
+      <div>
+        <label class="block mb-2 font-semibold">Dedication Message (Optional)</label>
+        <textarea placeholder="Happy Birthday! We love you!" class="w-full border border-gray-300 rounded-lg p-3" rows="3"></textarea>
+      </div>
 
-          <!-- Optional Appearance Choices -->
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label class="block mb-2 font-semibold">Skin Tone</label>
-              <select class="w-full border border-gray-300 rounded-lg p-3">
-                <option>Light</option>
-                <option>Medium</option>
-                <option>Dark</option>
-              </select>
-            </div>
-            <div>
-              <label class="block mb-2 font-semibold">Hair Style</label>
-              <select class="w-full border border-gray-300 rounded-lg p-3">
-                <option>Short</option>
-                <option>Long</option>
-                <option>Curly</option>
-                <option>Straight</option>
-              </select>
-            </div>
-          </div>
-
+      <!-- Optional Appearance Choices -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-semibold">Skin Tone</label>
+          <select class="w-full border border-gray-300 rounded-lg p-3">
+            <option>Light</option>
+            <option>Medium</option>
+            <option>Dark</option>
+          </select>
+        </div>
+        <div>
+          <label class="block mb-2 font-semibold">Hair Style</label>
+          <select class="w-full border border-gray-300 rounded-lg p-3">
+            <option>Short</option>
+            <option>Long</option>
+            <option>Curly</option>
+            <option>Straight</option>
+          </select>
         </div>
       </div>
 
-      <!-- Preview Section -->
-      <div class="bg-pink-100 p-6 rounded-xl text-center">
-        <h3 class="text-2xl font-semibold mb-4">Live Book Preview ✨</h3>
-        <div class="flex flex-col items-center space-y-4">
-          <div class="w-40 h-40 bg-white rounded-full shadow-md flex items-center justify-center overflow-hidden">
-            <img id="preview-image" class="hidden w-full h-full object-cover">
-          </div>
-          <div class="text-xl font-bold" id="preview-name">Your Child's Name</div>
-        </div>
-      </div>
+    </div>
+  </div>
 
-      <!-- Save and Continue Button -->
-      <div class="text-center">
-        <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white text-lg font-semibold px-10 py-4 rounded-full mt-6">
-          Save and Continue
-        </button>
+  <!-- Preview Section -->
+  <div class="bg-blue-100 p-6 rounded-xl text-center">
+    <h3 class="text-2xl font-semibold mb-4">Live Book Preview ✨</h3>
+    <div class="flex flex-col items-center space-y-4">
+      <div class="w-40 h-40 bg-white rounded-full shadow-md flex items-center justify-center overflow-hidden">
+        <img id="preview-image" class="hidden w-full h-full object-cover">
       </div>
+      <div class="text-xl font-bold" id="preview-name">Your Child's Name</div>
+    </div>
+  </div>
 
-    </form>
+  <!-- Save and Continue Button -->
+  <div class="text-center">
+    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold px-10 py-4 rounded-full mt-6">
+      Save and Continue
+    </button>
+  </div>
+
+</form>
 
   </div>
-</section>
-
-<!-- JavaScript for Dynamic Preview -->
-<script>
+</section><!-- JavaScript for Dynamic Preview --><script>
 const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
@@ -135,7 +121,5 @@ function updatePreviewName() {
   const nameInput = document.getElementById('child-name').value;
   previewName.textContent = nameInput || "Your Child's Name";
 }
-</script>
-
-</body>
+</script></body>
 </html>
