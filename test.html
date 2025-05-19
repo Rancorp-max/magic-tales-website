@@ -104,40 +104,105 @@
 
   </div>
 </section><script>
-  const categories = [
-    "Potty Training", "Adventure", "Get to Know Names in the Family", "Get to Know the Neighborhood",
-    "Bedtime Routine", "First Day of School", "Learning ABCs", "Counting and Numbers",
-    "Healthy Eating", "Brushing Teeth", "Manners and Etiquette", "Sharing and Kindness",
-    "Making New Friends", "Dealing with Emotions", "Going to the Doctor", "Visiting the Dentist",
-    "Exploring Nature", "Animal Adventures", "Traveling and Exploring New Places", "Learning Colors and Shapes",
-    "Music and Rhythm", "Sports and Outdoor Play", "Building and Construction", "Superhero Adventures",
-    "Magic and Fantasy", "Science Experiments at Home", "Weather and Seasons", "Under the Sea",
-    "Space Exploration", "Dinosaurs and Prehistoric Times", "Fairy Tales and Legends", "Holiday Celebrations",
-    "Helping Around the House", "Camping and Outdoor Adventures", "Gardening and Plants",
-    "Learning About Different Cultures", "Transportation and Vehicles", "Story of My Birth",
-    "Fun with Pets", "Birthday Party Planning", "Baking and Cooking with Family", "Art and Craft Projects",
-    "Learning about Jobs and Careers", "Visiting Grandparents", "Exploring the Farm",
-    "Zoo and Safari Adventures", "Aquarium and Ocean Life", "Mindfulness and Relaxation",
-    "Going to the Library", "Imagination and Creativity Stories"
-  ];
+  const categoryIcons = {
+    "Potty Training": "https://img.icons8.com/color/96/toilet-training.png",
+    "Adventure": "https://img.icons8.com/color/96/trekking.png",
+    "Get to Know Names in the Family": "https://img.icons8.com/color/96/family.png",
+    "Get to Know the Neighborhood": "https://img.icons8.com/color/96/city.png",
+    "Bedtime Routine": "https://img.icons8.com/color/96/sleeping-in-bed.png",
+    "First Day of School": "https://img.icons8.com/color/96/school.png",
+    "Learning ABCs": "https://img.icons8.com/color/96/abc.png",
+    "Counting and Numbers": "https://img.icons8.com/color/96/numbers.png",
+    "Healthy Eating": "https://img.icons8.com/color/96/salad.png",
+    "Brushing Teeth": "https://img.icons8.com/color/96/toothbrush.png",
+    "Manners and Etiquette": "https://img.icons8.com/color/96/handshake.png",
+    "Sharing and Kindness": "https://img.icons8.com/color/96/gift.png",
+    "Making New Friends": "https://img.icons8.com/color/96/conference-call.png",
+    "Dealing with Emotions": "https://img.icons8.com/color/96/happy--v1.png",
+    "Going to the Doctor": "https://img.icons8.com/color/96/stethoscope.png",
+    "Visiting the Dentist": "https://img.icons8.com/color/96/tooth.png",
+    "Exploring Nature": "https://img.icons8.com/color/96/forest.png",
+    "Animal Adventures": "https://img.icons8.com/color/96/lion.png",
+    "Traveling and Exploring New Places": "https://img.icons8.com/color/96/globe.png",
+    "Learning Colors and Shapes": "https://img.icons8.com/color/96/geometry.png",
+    "Music and Rhythm": "https://img.icons8.com/color/96/musical-notes.png",
+    "Sports and Outdoor Play": "https://img.icons8.com/color/96/soccer-ball.png",
+    "Building and Construction": "https://img.icons8.com/color/96/crane.png",
+    "Superhero Adventures": "https://img.icons8.com/color/96/superhero.png",
+    "Magic and Fantasy": "https://img.icons8.com/color/96/magic-wand.png",
+    "Science Experiments at Home": "https://img.icons8.com/color/96/test-tube.png",
+    "Weather and Seasons": "https://img.icons8.com/color/96/sun.png",
+    "Under the Sea": "https://img.icons8.com/color/96/dolphin.png",
+    "Space Exploration": "https://img.icons8.com/color/96/rocket.png",
+    "Dinosaurs and Prehistoric Times": "https://img.icons8.com/color/96/dinosaur.png",
+    "Fairy Tales and Legends": "https://img.icons8.com/color/96/fairy.png",
+    "Holiday Celebrations": "https://img.icons8.com/color/96/christmas-star.png",
+    "Helping Around the House": "https://img.icons8.com/color/96/vacuum-cleaner.png",
+    "Camping and Outdoor Adventures": "https://img.icons8.com/color/96/camping-tent.png",
+    "Gardening and Plants": "https://img.icons8.com/color/96/gardening.png",
+    "Learning About Different Cultures": "https://img.icons8.com/color/96/earth-planet.png",
+    "Transportation and Vehicles": "https://img.icons8.com/color/96/car--v1.png",
+    "Story of My Birth": "https://img.icons8.com/color/96/baby.png",
+    "Fun with Pets": "https://img.icons8.com/color/96/dog.png",
+    "Birthday Party Planning": "https://img.icons8.com/color/96/birthday-cake.png",
+    "Baking and Cooking with Family": "https://img.icons8.com/color/96/bread.png",
+    "Art and Craft Projects": "https://img.icons8.com/color/96/paint-palette.png",
+    "Learning about Jobs and Careers": "https://img.icons8.com/color/96/briefcase.png",
+    "Visiting Grandparents": "https://img.icons8.com/color/96/elderly-person.png",
+    "Exploring the Farm": "https://img.icons8.com/color/96/farm.png",
+    "Zoo and Safari Adventures": "https://img.icons8.com/color/96/zebra.png",
+    "Aquarium and Ocean Life": "https://img.icons8.com/color/96/fish.png",
+    "Mindfulness and Relaxation": "https://img.icons8.com/color/96/lotus-position.png",
+    "Going to the Library": "https://img.icons8.com/color/96/books.png",
+    "Imagination and Creativity Stories": "https://img.icons8.com/color/96/light-on.png"
+  };
 
+  const categories = Object.keys(categoryIcons);
   const grid = document.getElementById("categoryGrid");
   const search = document.getElementById("categorySearch");
 
   function renderCategories(filter = "") {
     grid.innerHTML = "";
-    const filtered = categories.filter(cat => cat.toLowerCase().includes(filter.toLowerCase()));
-    filtered.forEach(cat => {
-      const item = document.createElement("a");
-      item.href = "create.html";
-      item.className = "bg-sky-100 hover:bg-sky-200 p-4 rounded-xl shadow transition block animate-on-scroll";
-      item.innerHTML = `
-        <div class="text-center">
-          <img src="https://img.icons8.com/color/64/book.png" alt="${cat}" class="mx-auto mb-3"/>
-          <h3 class="text-lg font-semibold text-sky-700">${cat}</h3>
-        </div>
-      `;
-      grid.appendChild(item);
+    Object.entries(categoryIcons).forEach(([category, icon]) => {
+      const matched = category.toLowerCase().includes(filter.toLowerCase());
+      categoryIcons[category] = icon; // keep icon mapping
+    });
+
+    const themes = {
+      "Learning": ["Learning ABCs", "Counting and Numbers", "Learning Colors and Shapes", "Learning about Jobs and Careers", "Learning About Different Cultures"],
+      "Health & Hygiene": ["Potty Training", "Healthy Eating", "Brushing Teeth", "Going to the Doctor", "Visiting the Dentist"],
+      "Daily Routines": ["Bedtime Routine", "First Day of School", "Helping Around the House", "Going to the Library"],
+      "Emotions & Social": ["Manners and Etiquette", "Sharing and Kindness", "Making New Friends", "Dealing with Emotions", "Mindfulness and Relaxation"],
+      "Adventure & Exploration": ["Adventure", "Traveling and Exploring New Places", "Exploring Nature", "Zoo and Safari Adventures", "Under the Sea", "Space Exploration", "Aquarium and Ocean Life", "Exploring the Farm", "Camping and Outdoor Adventures"],
+      "Creativity & Imagination": ["Art and Craft Projects", "Imagination and Creativity Stories", "Magic and Fantasy", "Superhero Adventures", "Fairy Tales and Legends"],
+      "Celebration & Life Events": ["Birthday Party Planning", "Holiday Celebrations", "Story of My Birth", "Visiting Grandparents"],
+      "Animals & Pets": ["Animal Adventures", "Fun with Pets", "Dinosaurs and Prehistoric Times"],
+      "Activities & Hobbies": ["Music and Rhythm", "Sports and Outdoor Play", "Baking and Cooking with Family", "Gardening and Plants", "Building and Construction"],
+      "Family & Community": ["Get to Know Names in the Family", "Get to Know the Neighborhood", "Transportation and Vehicles"]
+    };
+
+    Object.entries(themes).forEach(([theme, categoryList]) => {
+      const filtered = categoryList.filter(cat => cat.toLowerCase().includes(filter.toLowerCase()));
+      if (filtered.length === 0) return;
+
+      const header = document.createElement("h3");
+      header.className = "text-xl font-bold text-sky-700 text-left col-span-full mt-8 mb-2";
+      header.textContent = theme;
+      grid.appendChild(header);
+
+      filtered.forEach(cat => {
+        const icon = categoryIcons[cat] || "https://img.icons8.com/color/96/book.png";
+        const item = document.createElement("a");
+        item.href = "create.html";
+        item.className = "bg-sky-100 hover:bg-sky-200 p-4 rounded-xl shadow transition transform hover:scale-105 block animate-on-scroll";
+        item.innerHTML = `
+          <div class="text-center">
+            <img src="${icon}" alt="${cat}" class="mx-auto mb-3"/>
+            <h3 class="text-lg font-semibold text-sky-700">${cat}</h3>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
     });
   }
 
