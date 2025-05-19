@@ -4,66 +4,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customize Your Storybook - MagicTales</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .glass {
+      background-color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+    }
+    .form-label {
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+    }
+    .form-input {
+      transition: all 0.2s;
+    }
+    .form-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+    }
+  </style>
 </head>
-<body class="bg-sky-50 min-h-screen text-gray-800"><!-- Header --><header class="sticky top-0 bg-white shadow-md z-50">
+<body class="bg-gradient-to-br from-sky-50 to-sky-100 min-h-screen text-gray-800"><!-- Header --><header class="sticky top-0 bg-white shadow-md z-50">
   <div class="container mx-auto flex items-center justify-between py-4 px-6">
-    <div class="text-2xl font-bold text-sky-500">MagicTales</div>
+    <div class="text-2xl font-bold text-sky-500 tracking-wide">MagicTales</div>
     <nav class="hidden md:flex space-x-8 text-lg">
       <a href="/" class="hover:text-sky-500">Home</a>
       <a href="/#howitworks" class="hover:text-sky-500">How It Works</a>
       <a href="/#categories" class="hover:text-sky-500">Shop Books</a>
     </nav>
   </div>
-</header><!-- Main Customization Section --><section class="py-16">
-  <div class="container mx-auto px-6 max-w-4xl bg-white rounded-2xl shadow-lg p-10"><h2 class="text-4xl font-bold mb-10 text-center text-sky-500">Personalize and Get Notified</h2>
-
-<form class="space-y-12" action="https://formspree.io/f/YOURCODE" method="POST">
-
-  <!-- Step 1: Upload Photo -->
+</header><!-- Customization Form Section --><section class="py-20">
+  <div class="container mx-auto px-6 max-w-4xl glass rounded-3xl shadow-2xl p-10">
+    <h2 class="text-4xl font-bold mb-10 text-center text-sky-500 tracking-tight">Create a Magical Storybook</h2>
+    <form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-12"><!-- Step 1 -->
   <div>
-    <h3 class="text-2xl font-semibold mb-4">1. Upload Your Child's Photo</h3>
-    <div class="border-2 border-dashed border-sky-300 p-6 rounded-lg flex flex-col items-center justify-center text-center bg-sky-50 relative">
+    <div class="flex items-center gap-4 mb-4">
+      <img src="https://img.icons8.com/color/48/image-file.png" class="w-10 h-10">
+      <h3 class="text-2xl font-semibold text-gray-700">1. Upload Your Child's Photo</h3>
+    </div>
+    <div class="border-2 border-dashed border-sky-300 p-6 rounded-xl bg-white/60 flex flex-col items-center">
       <input type="file" accept="image/*" class="hidden" id="photo-upload">
-      <label for="photo-upload" class="cursor-pointer text-sky-500 font-semibold text-lg">
+      <label for="photo-upload" class="cursor-pointer text-sky-600 font-medium hover:underline">
         Click to upload a photo
       </label>
-      <img id="photo-preview" class="hidden mt-4 w-40 h-40 object-cover rounded-full shadow-md">
-      <p class="text-sm text-gray-500 mt-2">Best with clear, front-facing photos</p>
+      <img id="photo-preview" class="hidden mt-4 w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg">
+      <p class="text-sm text-gray-500 mt-2">Use a clear, front-facing photo</p>
     </div>
   </div>
 
-  <!-- Step 2: Child Information -->
+  <!-- Step 2 -->
   <div>
-    <h3 class="text-2xl font-semibold mb-4">2. Tell Us About Your Child</h3>
-    <div class="space-y-6">
+    <div class="flex items-center gap-4 mb-4">
+      <img src="https://img.icons8.com/color/48/conference-background-selected.png" class="w-10 h-10">
+      <h3 class="text-2xl font-semibold text-gray-700">2. Tell Us About Your Child</h3>
+    </div>
+    <div class="grid gap-6">
       <div>
-        <label class="block mb-2 font-semibold">Child's Name</label>
-        <input type="text" name="name" id="child-name" placeholder="Ella, Jayden, etc." class="w-full border border-gray-300 rounded-lg p-3" oninput="updatePreviewName()">
+        <label class="form-label block mb-2">Child's Name</label>
+        <input name="name" id="child-name" placeholder="Ella, Jayden, etc." class="form-input w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()">
       </div>
       <div>
-        <label class="block mb-2 font-semibold">Child's Age</label>
-        <input type="number" name="age" min="0" placeholder="4" class="w-full border border-gray-300 rounded-lg p-3">
+        <label class="form-label block mb-2">Age</label>
+        <input name="age" type="number" min="0" placeholder="4" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
       </div>
       <div>
-        <label class="block mb-2 font-semibold">Favorite Color</label>
-        <input type="text" name="favoriteColor" placeholder="Blue, pink, yellow..." class="w-full border border-gray-300 rounded-lg p-3">
+        <label class="form-label block mb-2">Favorite Color</label>
+        <input name="favoriteColor" type="text" placeholder="Blue, pink, yellow..." class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
       </div>
       <div>
-        <label class="block mb-2 font-semibold">Dedication Message (Optional)</label>
-        <textarea name="message" placeholder="Happy Birthday! We love you!" class="w-full border border-gray-300 rounded-lg p-3" rows="3"></textarea>
+        <label class="form-label block mb-2">Dedication Message</label>
+        <textarea name="message" placeholder="Happy Birthday! We love you!" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3" rows="3"></textarea>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <label class="block mb-2 font-semibold">Skin Tone</label>
-          <select name="skinTone" class="w-full border border-gray-300 rounded-lg p-3">
+          <label class="form-label block mb-2">Skin Tone</label>
+          <select name="skinTone" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
             <option>Light</option>
             <option>Medium</option>
             <option>Dark</option>
           </select>
         </div>
         <div>
-          <label class="block mb-2 font-semibold">Hair Style</label>
-          <select name="hairStyle" class="w-full border border-gray-300 rounded-lg p-3">
+          <label class="form-label block mb-2">Hair Style</label>
+          <select name="hairStyle" class="form-input w-full border border-gray-300 rounded-xl px-4 py-3">
             <option>Short</option>
             <option>Long</option>
             <option>Curly</option>
@@ -74,22 +98,25 @@
     </div>
   </div>
 
-  <!-- Preview Section -->
-  <div class="bg-sky-100 p-6 rounded-xl text-center">
-    <h3 class="text-2xl font-semibold mb-4">Live Book Preview ✨</h3>
-    <div class="flex flex-col items-center space-y-4">
-      <div class="w-40 h-40 bg-white rounded-full shadow-md flex items-center justify-center overflow-hidden">
+  <!-- Preview -->
+  <div>
+    <div class="flex items-center gap-4 mb-4">
+      <img src="https://img.icons8.com/color/48/preview-pane.png" class="w-10 h-10">
+      <h3 class="text-2xl font-semibold text-gray-700">Live Book Preview ✨</h3>
+    </div>
+    <div class="bg-white/70 p-6 rounded-xl text-center shadow">
+      <div class="w-32 h-32 bg-white rounded-full shadow-md mx-auto overflow-hidden mb-4">
         <img id="preview-image" class="hidden w-full h-full object-cover">
       </div>
-      <div class="text-xl font-bold" id="preview-name">Your Child's Name</div>
+      <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
     </div>
   </div>
 
-  <!-- Email Signup Submission -->
+  <!-- Email Submission -->
   <div class="text-center">
-    <p class="text-lg font-medium text-sky-600 mb-2">Enter your email and get <span class="font-bold">50% off</span> when we launch!</p>
-    <input type="email" name="email" placeholder="you@example.com" required class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-300 w-full sm:w-1/2 mb-4">
-    <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white text-lg font-semibold px-10 py-4 rounded-full">
+    <p class="text-lg text-sky-600 font-medium mb-4">Enter your email to receive <strong>50% off</strong> when we launch!</p>
+    <input name="email" type="email" placeholder="you@example.com" required class="form-input border border-gray-300 rounded-full px-5 py-3 w-full max-w-md mb-4">
+    <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-10 py-3 rounded-full shadow-lg transition-all">
       Get My Discount
     </button>
   </div>
@@ -97,17 +124,16 @@
 </form>
 
   </div>
-</section><!-- JavaScript for Dynamic Preview --><script>
+</section><script>
 const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
 const previewName = document.getElementById('preview-name');
-
-photoUpload.addEventListener('change', function() {
+photoUpload.addEventListener('change', function () {
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       photoPreview.src = e.target.result;
       previewImage.src = e.target.result;
       photoPreview.classList.remove('hidden');
@@ -116,7 +142,6 @@ photoUpload.addEventListener('change', function() {
     reader.readAsDataURL(file);
   }
 });
-
 function updatePreviewName() {
   const nameInput = document.getElementById('child-name').value;
   previewName.textContent = nameInput || "Your Child's Name";
