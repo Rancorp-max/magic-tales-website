@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       version: "a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
       input: {
         image,
-        style: "Emoji",
+        style: "Video game",
         prompt: "a child in a magical storybook with a castle in the background",
         instant_id_strength: 0.8
       }
