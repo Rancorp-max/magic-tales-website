@@ -40,7 +40,13 @@ async function generatePreview(base64Image) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: base64Image })
     });
+
     const data = await response.json();
+
+    if (!response.ok) {
+      const errorDetails = data.error || 'An unknown error occurred.';
+      throw new Error(errorDetails);
+    }
 
     if (!data.output) throw new Error('No output received from Replicate.');
 
