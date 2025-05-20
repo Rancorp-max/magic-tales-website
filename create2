@@ -101,7 +101,7 @@ photoUpload.addEventListener('change', async function () {
     photoPreview.classList.remove('hidden');
 
     // Send to Replicate API proxy
-    const response = await fetch('/api/facetomany.js', {
+    const response = await fetch('/api/facetomany', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: base64Image })
