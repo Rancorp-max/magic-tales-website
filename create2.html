@@ -1,89 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customize Your Storybook - MagicTales</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-sky-50 to-sky-100 min-h-screen text-gray-800">
-
-<!-- Header -->
-<header class="sticky top-0 bg-white shadow-md z-50">
-  <div class="container mx-auto flex items-center justify-between py-4 px-6">
-    <div class="text-2xl font-bold text-sky-500">MagicTales</div>
-    <nav class="hidden md:flex space-x-8 text-lg">
-      <a href="/" class="hover:text-sky-500">Home</a>
-      <a href="/#howitworks" class="hover:text-sky-500">How It Works</a>
-      <a href="/#categories" class="hover:text-sky-500">Shop Books</a>
-    </nav>
-  </div>
-</header>
-
-<!-- Main Customization Section -->
-<section class="py-16">
-  <div class="container mx-auto px-6 max-w-5xl bg-white rounded-3xl shadow-lg p-10">
-    <h2 class="text-4xl font-bold mb-10 text-center text-sky-600">Customize Your Book</h2>
-
-    <form class="space-y-12" id="customization-form">
-      <!-- Step 1: Upload Photo -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-4">1. Upload Your Child's Photo</h3>
-        <div class="border-2 border-dashed border-sky-300 p-6 rounded-lg flex flex-col items-center text-center bg-sky-50 relative">
-          <input type="file" accept="image/*" class="hidden" id="photo-upload">
-          <label for="photo-upload" class="cursor-pointer text-sky-500 font-semibold text-lg">Click to upload a photo</label>
-          <img id="photo-preview" class="hidden mt-4 w-32 h-32 object-cover rounded-full shadow-md">
-          <p class="text-sm text-gray-500 mt-2">Used only to generate an avatar. Deleted after creation.</p>
-        </div>
-      </div>
-
-      <!-- Step 2: Child Information -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-4">2. Tell Us About Your Child</h3>
-        <div class="space-y-6">
-          <input type="text" id="child-name" placeholder="Child's Name" class="w-full border border-gray-300 rounded-lg p-3" oninput="updatePreviewName()">
-          <input type="number" min="0" placeholder="Age" class="w-full border border-gray-300 rounded-lg p-3">
-          <input type="text" placeholder="Favorite Color" class="w-full border border-gray-300 rounded-lg p-3">
-          <textarea placeholder="Dedication Message (Optional)" class="w-full border border-gray-300 rounded-lg p-3" rows="3"></textarea>
-          <div class="grid md:grid-cols-2 gap-6">
-            <select class="w-full border border-gray-300 rounded-lg p-3">
-              <option>Light Skin</option>
-              <option>Medium Skin</option>
-              <option>Dark Skin</option>
-            </select>
-            <select class="w-full border border-gray-300 rounded-lg p-3">
-              <option>Short Hair</option>
-              <option>Long Hair</option>
-              <option>Curly Hair</option>
-              <option>Straight Hair</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Live Book Preview -->
-      <div class="bg-sky-100 p-6 rounded-xl text-center">
-        <h3 class="text-2xl font-semibold mb-4">Live Book Preview ✨</h3>
-        <div class="flex flex-col items-center space-y-4">
-          <div class="w-40 h-40 bg-white rounded-full shadow-md flex items-center justify-center overflow-hidden">
-            <img id="preview-image" class="hidden w-full h-full object-cover">
-          </div>
-          <div class="text-xl font-bold" id="preview-name">Your Child's Name</div>
-        </div>
-      </div>
-
-      <!-- Email Capture -->
-      <div class="text-center">
-        <input name="email" type="email" required placeholder="Your email address" class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-400 w-full max-w-md">
-        <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white text-lg font-semibold px-10 py-4 rounded-full mt-6">Save My Spot & Get 50% Off</button>
-      </div>
-    </form>
-  </div>
-</section>
-
 <script>
 const photoUpload = document.getElementById('photo-upload');
 const photoPreview = document.getElementById('photo-preview');
@@ -99,31 +13,48 @@ photoUpload.addEventListener('change', async function () {
     const base64Image = e.target.result;
     photoPreview.src = base64Image;
     photoPreview.classList.remove('hidden');
+    previewName.textContent = "Generating magical avatar…";
 
-    // Send to Replicate API proxy
-    const response = await fetch('/api/facetomany', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: base64Image })
-    });
+    try {
+      const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Token YOUR_REPLICATE_API_TOKEN",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          version: "e5a939eae5db05a69e5b8c4c56d404cba8787be160058ecf302d4d3b9fc7c7c3",
+          input: {
+            image: base64Image,
+            style_name: "storybook"
+          }
+        })
+      });
 
-    const data = await response.json();
-
-    // Poll result URL
-    let outputUrl;
-    while (!outputUrl) {
-      const poll = await fetch(data.result);
-      const pollData = await poll.json();
-      if (pollData.status === 'succeeded') {
-        outputUrl = pollData.output[0];
-        previewImage.src = outputUrl;
-        previewImage.classList.remove('hidden');
-      } else {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+      const { id } = await replicateResponse.json();
+      let outputUrl = null;
+      while (!outputUrl) {
+        await new Promise(r => setTimeout(r, 2500));
+        const check = await fetch(`https://api.replicate.com/v1/predictions/${id}`, {
+          headers: { "Authorization": "Token YOUR_REPLICATE_API_TOKEN" }
+        });
+        const checkJson = await check.json();
+        if (checkJson.status === "succeeded") {
+          outputUrl = checkJson.output;
+        } else if (checkJson.status === "failed") {
+          throw new Error("Avatar generation failed.");
+        }
       }
+
+      previewImage.src = outputUrl;
+      previewImage.classList.remove('hidden');
+      previewName.textContent = "Your Magical Avatar";
+
+    } catch (err) {
+      console.error("Error generating preview:", err);
+      previewName.textContent = "Preview failed. Please try again.";
     }
   };
-
   reader.readAsDataURL(file);
 });
 
@@ -132,6 +63,3 @@ function updatePreviewName() {
   previewName.textContent = nameInput || "Your Child's Name";
 }
 </script>
-
-</body>
-</html>
