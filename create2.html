@@ -85,20 +85,38 @@
     </div>
   </div>
 
-  <!-- Right Panel - Preview -->
-  <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center">
-    <h3 class="text-2xl font-bold text-sky-600 mb-4">Live Book Preview ✨</h3>
-    <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-4 overflow-hidden">
-      <img id="preview-image" crossorigin="anonymous" class="hidden w-full h-full object-cover" />
+  <!-- Right Panel - Live Preview -->
+  <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center space-y-6">
+    <h3 class="text-2xl font-bold text-sky-600 mb-2">Live Book Preview ✨</h3>
+    
+    <div class="grid grid-cols-2 gap-6 justify-center items-start">
+      <!-- Original Photo -->
+      <div>
+        <h4 class="text-sm font-medium text-gray-500 mb-2">Original Photo</h4>
+        <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-2 overflow-hidden">
+          <img id="original-photo" crossorigin="anonymous" class="hidden w-full h-full object-cover" />
+        </div>
+      </div>
+
+      <!-- Replicate Avatar -->
+      <div>
+        <h4 class="text-sm font-medium text-gray-500 mb-2">AI-Generated Avatar</h4>
+        <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-2 overflow-hidden">
+          <img id="replicate-avatar" crossorigin="anonymous" class="hidden w-full h-full object-cover" />
+        </div>
+      </div>
     </div>
+
     <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
   </div>
 
 </section>
 
+<!-- Script -->
 <script>
-  const previewImage = document.getElementById("preview-image");
   const previewName = document.getElementById("preview-name");
+  const originalPhoto = document.getElementById("original-photo");
+  const replicateAvatar = document.getElementById("replicate-avatar");
 
   function updatePreviewName() {
     const nameInput = document.getElementById("child-name").value;
@@ -107,8 +125,9 @@
 
   uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
     const imageUrl = info.cdnUrl;
-    previewImage.src = imageUrl;
-    previewImage.classList.remove("hidden");
+    originalPhoto.src = imageUrl;
+    originalPhoto.classList.remove("hidden");
+    replicateAvatar.classList.add("hidden");
     previewName.textContent = "Generating magical avatar…";
 
     const res = await fetch("/api/generate-avatar", {
@@ -132,8 +151,8 @@
       }
     }
 
-    previewImage.src = outputUrl;
-    previewImage.classList.remove("hidden");
+    replicateAvatar.src = outputUrl;
+    replicateAvatar.classList.remove("hidden");
     previewName.textContent = "Your Magical Avatar";
   });
 </script>
