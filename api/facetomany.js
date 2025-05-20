@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const replicateResponse = await fetch('https://api.replicate.com/v1/predictions', {
     method: 'POST',
     headers: {
-      Authorization: `Token ${process.env.r8_cNzgVmT1Xp6ApHDdFRRYkkO1oQlhi7c35tM0s}`, // Store this securely
+      Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`, // Store this securely
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
