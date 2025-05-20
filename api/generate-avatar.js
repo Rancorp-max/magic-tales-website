@@ -12,8 +12,8 @@ export default async function handler(req, res) {
       version: "a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
       input: {
         image,
-        style: "Pixels",
-        prompt: "storybook character portrait",
+        style: "Emoji",
+        prompt: "a magical storybook",
         instant_id_strength: 0.8
       }
     })
