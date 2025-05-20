@@ -1,26 +1,26 @@
-// /api/facetomany.js
-
+// api/facetomany.js
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-  const body = await req.body;
-  const image = body.image;
+  const { image } = req.body;
 
-  const replicateRes = await fetch('https://api.replicate.com/v1/predictions', {
+  const replicateResponse = await fetch('https://api.replicate.com/v1/predictions', {
     method: 'POST',
     headers: {
-      'Authorization': `REPLICATE_API_TOKEN=r8_cNzgVmT1Xp6ApHDdFRRYkkO1oQlhi7c35tM0s`,
-      'Content-Type': 'application/json',
+      Authorization: `Token ${process.env.r8_cNzgVmT1Xp6ApHDdFRRYkkO1oQlhi7c35tM0s}`, // Store this securely
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      version: "770e157b26a4c02c30884f9432ec095bdad86dba211b55217eb0edc1b4239b30", // model version ID
+      version: '770e157b26a4c02c30884f9432ec095bdad86dba211b55217eb0edc1b4239b30', // Face-to-many version
       input: {
         image: image,
-        version: "anime" // or "disney", etc.
+        version: 'anime' // or disney, pixar, etc.
       }
     })
   });
 
-  const json = await replicateRes.json();
-  res.status(200).json({ result: json?.urls?.get });
+  const result = await replicateResponse.json();
+  res.status(200).json({ result: result.urls.get });
 }
