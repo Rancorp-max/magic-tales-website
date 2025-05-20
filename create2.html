@@ -3,81 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Customize Your Storybook</title>
+  <title>Customize Your Storybook - MagicTales</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    UPLOADCARE_PUBLIC_KEY = "your_uploadcare_public_key"; // Replace this
+    UPLOADCARE_PUBLIC_KEY = "your_uploadcare_public_key"; // Replace with your real key
   </script>
   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-sky-50 to-sky-100 min-h-screen text-gray-800">
 
-  <section class="py-20 max-w-4xl mx-auto px-6">
-    <div class="bg-white rounded-3xl shadow-xl p-8">
-      <h2 class="text-3xl font-bold text-sky-600 mb-6 text-center">Customize Your Storybook</h2>
+<!-- Header -->
+<header class="sticky top-0 bg-white shadow-md z-50">
+  <div class="container mx-auto flex items-center justify-between py-4 px-6">
+    <div class="text-2xl font-bold text-sky-500">MagicTales</div>
+    <nav class="hidden md:flex space-x-8 text-lg">
+      <a href="/" class="hover:text-sky-500">Home</a>
+      <a href="/#howitworks" class="hover:text-sky-500">How It Works</a>
+      <a href="/#categories" class="hover:text-sky-500">Shop Books</a>
+    </nav>
+  </div>
+</header>
 
-      <!-- Uploadcare widget -->
-      <div class="mb-6 text-center">
-        <input
-          type="hidden"
-          role="uploadcare-uploader"
-          data-crop="1:1"
-          data-images-only
-          data-clearable
-          id="upload-widget"
-        />
-        <p class="text-sm text-gray-500 mt-2">We’ll delete the photo after generating the avatar.</p>
+<!-- Customization Section -->
+<section class="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+
+  <!-- Left Panel -->
+  <div class="bg-white rounded-3xl shadow-xl p-8 space-y-6">
+
+    <h2 class="text-3xl font-bold text-sky-600 text-center mb-6">Customize Your Storybook</h2>
+
+    <!-- Uploadcare Widget -->
+    <div class="text-center">
+      <input type="hidden" role="uploadcare-uploader" data-crop="1:1" data-images-only data-clearable id="upload-widget"/>
+      <p class="text-sm text-gray-500 mt-2">We’ll delete the photo after generating the avatar.</p>
+    </div>
+
+    <!-- Form Fields -->
+    <div class="space-y-4">
+      <div>
+        <label class="block mb-1 font-semibold">Child's Name</label>
+        <input id="child-name" type="text" placeholder="Ella, Jayden..." class="w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()" />
       </div>
-
-      <!-- Preview section -->
-      <div class="bg-sky-50 p-6 rounded-xl text-center">
-        <h3 class="text-xl font-semibold text-sky-700 mb-4">Live Book Preview ✨</h3>
-        <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-4 overflow-hidden">
-          <img id="preview-image" class="hidden w-full h-full object-cover">
+      <div>
+        <label class="block mb-1 font-semibold">Child's Age</label>
+        <input type="number" min="0" placeholder="4" class="w-full border border-gray-300 rounded-xl px-4 py-3" />
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Favorite Color</label>
+        <input type="text" placeholder="Blue, pink..." class="w-full border border-gray-300 rounded-xl px-4 py-3" />
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Dedication Message</label>
+        <textarea rows="2" placeholder="Happy Birthday! We love you!" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-1 font-semibold">Skin Tone</label>
+          <select class="w-full border border-gray-300 rounded-xl px-4 py-3">
+            <option>Light</option>
+            <option>Medium</option>
+            <option>Dark</option>
+          </select>
         </div>
-        <div class="text-lg font-semibold text-sky-600" id="preview-name">Your Child's Avatar</div>
+        <div>
+          <label class="block mb-1 font-semibold">Hair Style</label>
+          <select class="w-full border border-gray-300 rounded-xl px-4 py-3">
+            <option>Short</option>
+            <option>Long</option>
+            <option>Curly</option>
+            <option>Straight</option>
+          </select>
+        </div>
       </div>
     </div>
-  </section>
 
-  <script>
-    const previewImage = document.getElementById("preview-image");
-    const previewName = document.getElementById("preview-name");
+    <!-- Email for Discount -->
+    <div class="text-center pt-6">
+      <p class="text-base text-sky-700 font-medium mb-2">Want 50% off your first storybook?</p>
+      <input name="email" type="email" required placeholder="Enter your email" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
+      <button class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-3 rounded-full shadow-md">Get My Discount</button>
+    </div>
+  </div>
 
-    uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
-      const imageUrl = info.cdnUrl;
+  <!-- Right Panel - Preview -->
+  <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center">
+    <h3 class="text-2xl font-bold text-sky-600 mb-4">Live Book Preview ✨</h3>
+    <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-4 overflow-hidden">
+      <img id="preview-image" class="hidden w-full h-full object-cover" />
+    </div>
+    <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
+  </div>
 
-      previewImage.src = imageUrl;
-      previewImage.classList.remove("hidden");
-      previewName.textContent = "Generating magical avatar…";
+</section>
 
-      // Step 1: Send to /api/generate-avatar
-      const res = await fetch("/api/generate-avatar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: imageUrl })
-      });
+<script>
+  const previewImage = document.getElementById("preview-image");
+  const previewName = document.getElementById("preview-name");
 
-      const { id } = await res.json();
+  function updatePreviewName() {
+    const nameInput = document.getElementById("child-name").value;
+    previewName.textContent = nameInput || "Your Child's Name";
+  }
 
-      // Step 2: Poll Replicate for result
-      let outputUrl = null;
-      while (!outputUrl) {
-        await new Promise(r => setTimeout(r, 2500));
-        const poll = await fetch(`/api/poll-avatar?id=${id}`);
-        const result = await poll.json();
-        if (result.status === "succeeded") {
-          outputUrl = result.output[0];
-        } else if (result.status === "failed") {
-          previewName.textContent = "Avatar generation failed. Please try again.";
-          return;
-        }
-      }
+  uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
+    const imageUrl = info.cdnUrl;
+    previewImage.src = imageUrl;
+    previewImage.classList.remove("hidden");
+    previewName.textContent = "Generating magical avatar…";
 
-      previewImage.src = outputUrl;
-      previewName.textContent = "Your Magical Avatar";
+    const res = await fetch("/api/generate-avatar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: imageUrl })
     });
-  </script>
+
+    const { id } = await res.json();
+
+    let outputUrl = null;
+    while (!outputUrl) {
+      await new Promise(r => setTimeout(r, 2500));
+      const poll = await fetch(`/api/poll-avatar?id=${id}`);
+      const result = await poll.json();
+      if (result.status === "succeeded") {
+        outputUrl = result.output[0];
+      } else if (result.status === "failed") {
+        previewName.textContent = "Avatar generation failed. Please try again.";
+        return;
+      }
+    }
+
+    previewImage.src = outputUrl;
+    previewImage.classList.remove("hidden");
+    previewName.textContent = "Your Magical Avatar";
+  });
+</script>
 
 </body>
 </html>
