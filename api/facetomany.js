@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       {
         input: {
           image,
-          style: "Clay",
+          style: "Pixar",
           prompt: "storybook children's character illustration",
           instant_id_strength: 0.8
         }
