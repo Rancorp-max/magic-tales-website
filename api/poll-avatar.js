@@ -8,4 +8,9 @@ export default async function handler(req, res) {
 
   const data = await statusRes.json();
   res.status(200).json(data);
+  
+  if (result.status === "succeeded") {
+  outputUrl = result.output[0]; // <- this is correct
+}
+
 }
