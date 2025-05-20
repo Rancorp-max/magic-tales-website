@@ -175,20 +175,14 @@ photoUpload.addEventListener('change', async function () {
     previewName.textContent = "Generating magical avatar…";
 
     try {
-      const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Token YOUR_REPLICATE_API_TOKEN",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          version: "e5a939eae5db05a69e5b8c4c56d404cba8787be160058ecf302d4d3b9fc7c7c3",
-          input: {
-            image: base64Image,
-            style_name: "storybook"
-          }
-        })
-      });
+const replicateResponse = await fetch("/api/generate-avatar", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ image: base64Image })
+});
+
 
       const { id } = await replicateResponse.json();
       let outputUrl = null;
