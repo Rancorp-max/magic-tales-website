@@ -1,23 +1,22 @@
-// /api/generate-avatar.js
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Only POST requests allowed' });
   }
 
   const { image } = req.body;
 
   try {
-    const response = await fetch('https://api.replicate.com/v1/predictions', {
-      method: 'POST',
+    const response = await fetch("https://api.replicate.com/v1/predictions", {
+      method: "POST",
       headers: {
-        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        'Content-Type': 'application/json',
+        "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: "e5a939eae5db05a69e5b8c4c56d404cba8787be160058ecf302d4d3b9fc7c7c3",
+        version: "a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
         input: {
-          image,
-          style_name: "storybook",
+          image,               // base64 or image URL
+          style_name: "storybook" // other options: "pixar", "sketch", etc.
         }
       })
     });
@@ -27,6 +26,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error("Replicate error:", error);
-    res.status(500).json({ error: "Failed to generate avatar" });
+    res.status(500).json({ error: "Avatar generation failed." });
   }
 }
