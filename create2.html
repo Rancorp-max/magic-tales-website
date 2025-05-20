@@ -195,7 +195,7 @@ photoUpload.addEventListener('change', async function () {
       while (!outputUrl) {
         await new Promise(r => setTimeout(r, 2500));
         const check = await fetch(`https://api.replicate.com/v1/predictions/${id}`, {
-          headers: { "Authorization": "Token YOUR_REPLICATE_API_TOKEN" }
+          headers: { "Authorization": "Token r8_Kho20RnnUgzZ9biqS3qqJRj2Ja9TKtP43xbz7" }
         });
         const checkJson = await check.json();
         if (checkJson.status === "succeeded") {
