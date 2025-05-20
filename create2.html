@@ -6,7 +6,7 @@
   <title>Customize Your Storybook - MagicTales</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418"; // Replace with your real key
+    UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418"; // Replace with your Uploadcare public key
   </script>
   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 </head>
@@ -24,15 +24,13 @@
   </div>
 </header>
 
-<!-- Customization Section -->
+<!-- Main Section -->
 <section class="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
-
   <!-- Left Panel -->
   <div class="bg-white rounded-3xl shadow-xl p-8 space-y-6">
-
     <h2 class="text-3xl font-bold text-sky-600 text-center mb-6">Customize Your Storybook</h2>
 
-    <!-- Uploadcare Widget -->
+    <!-- Upload Widget -->
     <div class="text-center">
       <input type="hidden" role="uploadcare-uploader" data-crop="1:1" data-images-only data-clearable id="upload-widget"/>
       <p class="text-sm text-gray-500 mt-2">We’ll delete the photo after generating the avatar.</p>
@@ -77,7 +75,7 @@
       </div>
     </div>
 
-    <!-- Email for Discount -->
+    <!-- Email Discount -->
     <div class="text-center pt-6">
       <p class="text-base text-sky-700 font-medium mb-2">Want 50% off your first storybook?</p>
       <input name="email" type="email" required placeholder="Enter your email" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
@@ -88,9 +86,9 @@
   <!-- Right Panel - Live Preview -->
   <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center space-y-6">
     <h3 class="text-2xl font-bold text-sky-600 mb-2">Live Book Preview ✨</h3>
-    
+
     <div class="grid grid-cols-2 gap-6 justify-center items-start">
-      <!-- Original Photo -->
+      <!-- Uploaded Image -->
       <div>
         <h4 class="text-sm font-medium text-gray-500 mb-2">Original Photo</h4>
         <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-2 overflow-hidden">
@@ -98,15 +96,20 @@
         </div>
       </div>
 
-<!-- Replicate Avatar -->
-<div>
-  <h4 class="text-sm font-medium text-gray-500 mb-2">AI-Generated Avatar</h4>
-  <div class="w-128 h-128 rounded-2xl mx-auto bg-white shadow-inner mb-2 overflow-hidden border border-sky-200">
-    <img id="replicate-avatar" crossorigin="anonymous" class="hidden w-full h-full object-cover transition-all duration-500" />
+      <!-- AI Generated Avatar -->
+      <div>
+        <h4 class="text-sm font-medium text-gray-500 mb-2">AI-Generated Avatar</h4>
+        <div class="w-64 h-64 rounded-2xl mx-auto bg-white shadow-inner mb-2 overflow-hidden border border-sky-200">
+          <img id="replicate-avatar" crossorigin="anonymous" class="hidden w-full h-full object-cover transition-all duration-500" />
+        </div>
+      </div>
+    </div>
+
+    <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
+    <div id="loading-indicator" class="mt-3 hidden">
+      <div class="mx-auto w-6 h-6 border-4 border-sky-300 border-t-transparent rounded-full animate-spin"></div>
+    </div>
   </div>
-</div>
-
-
 </section>
 
 <!-- Script -->
@@ -114,6 +117,7 @@
   const previewName = document.getElementById("preview-name");
   const originalPhoto = document.getElementById("original-photo");
   const replicateAvatar = document.getElementById("replicate-avatar");
+  const loadingIndicator = document.getElementById("loading-indicator");
 
   function updatePreviewName() {
     const nameInput = document.getElementById("child-name").value;
@@ -126,6 +130,7 @@
     originalPhoto.classList.remove("hidden");
     replicateAvatar.classList.add("hidden");
     previewName.textContent = "Generating magical avatar…";
+    loadingIndicator.classList.remove("hidden");
 
     const res = await fetch("/api/generate-avatar", {
       method: "POST",
@@ -136,21 +141,34 @@
     const { id } = await res.json();
 
     let outputUrl = null;
-    while (!outputUrl) {
+    let attempts = 0;
+    while (!outputUrl && attempts < 12) {
       await new Promise(r => setTimeout(r, 2500));
       const poll = await fetch(`/api/poll-avatar?id=${id}`);
       const result = await poll.json();
+
       if (result.status === "succeeded") {
         outputUrl = result.output[0];
+        break;
       } else if (result.status === "failed") {
-        previewName.textContent = "Avatar generation failed. Please try again.";
+        previewName.textContent = "Avatar generation failed.";
+        loadingIndicator.classList.add("hidden");
         return;
       }
+
+      attempts++;
+    }
+
+    if (!outputUrl) {
+      previewName.textContent = "Timed out. Try again.";
+      loadingIndicator.classList.add("hidden");
+      return;
     }
 
     replicateAvatar.src = outputUrl;
     replicateAvatar.classList.remove("hidden");
     previewName.textContent = "Your Magical Avatar";
+    loadingIndicator.classList.add("hidden");
   });
 </script>
 
