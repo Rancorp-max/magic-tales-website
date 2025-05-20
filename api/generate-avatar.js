@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       input: {
         image,
         style: "Emoji",
-        prompt: "a magical storybook",
+        prompt: "a child in a magical storybook with a castle in the background",
         instant_id_strength: 0.8
       }
     })
