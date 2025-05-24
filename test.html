@@ -1,225 +1,140 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MagicTales - Personalized Storybooks</title>
+  <title>Customize Your Storybook - MagicTales</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      elements.forEach(el => observer.observe(el));
-    });
+    UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418";
   </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
   <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
     }
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-    @keyframes sparkleTwinkle {
-      0%, 100% { transform: scale(1); opacity: 0.8; filter: drop-shadow(0 0 3px gold); }
-      50% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 8px gold); }
-    }
-    .animate-sparkle {
-      animation: sparkleTwinkle 2s ease-in-out infinite;
-    }
-    @keyframes glowBorder {
-      0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6); }
-      50% { box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8); }
-    }
-    .animate-glow {
-      animation: glowBorder 2s ease-in-out infinite;
+    .sparkle {
+      animation: sparkle 3s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="bg-white text-gray-800"><!-- Hero Section --><section class="relative h-screen w-full overflow-hidden bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400">
-  <div class="absolute inset-0 z-0">
-    <img src="./hero-image.png" alt="Magical storybook illustration" class="w-full h-full object-cover opacity-80" />
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70"></div>
+<body class="bg-gradient-to-br from-sky-50 to-sky-100 text-gray-800 antialiased scroll-smooth">
+
+<!-- Navbar -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-md">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold text-sky-500">MagicTales</div>
+    <nav class="hidden md:flex space-x-6 text-sky-700 text-lg">
+      <a href="/" class="hover:text-sky-500 transition">Home</a>
+      <a href="/#howitworks" class="hover:text-sky-500 transition">How It Works</a>
+      <a href="/#categories" class="hover:text-sky-500 transition">Shop Books</a>
+    </nav>
   </div>
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center w-full px-6">
-    <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto mb-4">Bring Your Child's Adventures to Life!</h1>
-    <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">Create a personalized storybook starring your child, full of magic, wonder, and adventure!</p>
-    <div class="max-w-xl mx-auto bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-xl p-6">
-      <h2 class="text-2xl font-bold text-sky-400 mb-2">Ready to Make Some Magic?</h2>
-      <p class="text-sky-500 mb-4 font-medium flex items-center justify-center gap-2">
-        <span class="inline-flex items-center gap-2 relative group">
-          <svg class="w-6 h-6 text-yellow-300 animate-sparkle cursor-help" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.975a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.922-.755 1.688-1.538 1.118l-3.388-2.462a1 1 0 00-1.176 0l-3.388 2.462c-.783.57-1.838-.196-1.538-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.049 9.402c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.975z"/>
-          </svg>
-          <span>Sign up now and get <span class="font-bold text-sky-600">50% off</span> your first storybook!</span>
-          <span class="absolute bottom-full mb-2 w-56 text-sm text-white bg-sky-400 rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-white shadow-lg animate-glow">
-            You'll receive the discount code by email once we launch!
-          </span>
-        </span>
-      </p>
-      <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
-        <input type="email" name="email" required placeholder="Your email address" class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-300 w-full sm:w-auto">
-        <button type="submit" class="bg-sky-200 hover:bg-sky-300 text-gray-800 font-semibold px-6 py-3 rounded-full transition">Notify Me</button>
-      </form>
+</header>
+
+<!-- Customization Section -->
+<section class="py-16 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+  <!-- Upload & Info Panel -->
+  <div class="bg-white rounded-3xl shadow-xl p-8 space-y-6">
+    <h2 class="text-3xl font-bold text-sky-600 text-center">Customize Your Storybook</h2>
+
+    <div>
+      <label class="block mb-2 font-semibold">Upload a Photo</label>
+      <input type="hidden" role="uploadcare-uploader" data-crop="1:1" data-images-only data-clearable id="upload-widget" />
+      <p class="text-xs text-gray-500 mt-1">We'll delete the photo after creating your magical avatar.</p>
     </div>
-  </div>
-</section><!-- How It Works Section --><section class="py-20 bg-sky-50 text-center">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-sky-600 mb-12 animate-on-scroll">How It Works</h2>
-    <div class="grid md:grid-cols-3 gap-12">
-      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
-        <img src="https://img.icons8.com/color/96/add-image.png" alt="Upload" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold mb-2">1. Upload Your Photo</h3>
-        <p class="text-gray-600">Choose a fun photo of your child — this will be transformed into a magical storybook character!</p>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block mb-1 font-semibold">Child's Name</label>
+        <input id="child-name" type="text" placeholder="Ella, Jayden..." class="w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()" />
       </div>
-      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
-        <img src="https://img.icons8.com/color/96/open-book--v2.png" alt="Customize" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold mb-2">2. Watch the Magic</h3>
-        <p class="text-gray-600">Our AI creates stunning illustrations and brings your child’s likeness into every page of the story.</p>
+      <div>
+        <label class="block mb-1 font-semibold">Age</label>
+        <input type="number" min="0" placeholder="4" class="w-full border border-gray-300 rounded-xl px-4 py-3" />
       </div>
-      <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition animate-on-scroll">
-        <img src="https://img.icons8.com/color/96/book-shelf.png" alt="Delivery" class="mx-auto mb-4">
-        <h3 class="text-2xl font-semibold mb-2">3. Receive Your Book</h3>
-        <p class="text-gray-600">Get your beautifully printed, personalized book delivered to your door – a keepsake to treasure forever.</p>
+      <div>
+        <label class="block mb-1 font-semibold">Favorite Color</label>
+        <input type="text" placeholder="Blue, pink..." class="w-full border border-gray-300 rounded-xl px-4 py-3" />
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Dedication Message</label>
+        <textarea rows="2" placeholder="Happy Birthday! We love you!" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
       </div>
     </div>
+
+    <div class="text-center pt-6">
+      <p class="text-base text-sky-700 font-medium mb-2">Want 50% off your first storybook?</p>
+      <input name="email" type="email" required placeholder="Enter your email" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
+      <button class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-3 rounded-full shadow-md">Get My Discount</button>
+    </div>
   </div>
-<!-- Book Categories Section --><section class="py-20 bg-white text-center relative overflow-hidden">
-  <div class="max-w-6xl mx-auto px-6 relative z-10">
-    <h2 class="text-4xl font-bold text-sky-600 mb-8 animate-on-scroll">Explore Book Categories</h2><!-- Search Input -->
-<div class="mb-12">
-  <input type="text" id="categorySearch" placeholder="Search categories..." class="w-full max-w-lg mx-auto px-6 py-3 border border-sky-200 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"/>
-</div>
 
-<!-- Categories Grid -->
-<div id="categoryGrid" class="grid md:grid-cols-4 gap-6">
-  <!-- Category items will be inserted by script -->
-</div>
+  <!-- Avatar Preview -->
+  <div class="relative bg-white/90 rounded-3xl shadow-2xl p-10 text-center">
+    <div class="absolute top-4 left-6 w-5 h-5 bg-yellow-300 rounded-full opacity-70 sparkle"></div>
+    <div class="absolute bottom-6 right-6 w-6 h-6 bg-pink-300 rounded-full opacity-60 sparkle"></div>
 
+    <h3 class="text-3xl font-extrabold text-sky-600 mb-6">Meet Your Hero ✨</h3>
+
+    <div class="bg-gradient-to-br from-yellow-50 via-white to-yellow-100 p-6 rounded-2xl shadow-inner border border-yellow-200">
+      <div class="w-64 h-64 rounded-[30px] mx-auto bg-white shadow-lg overflow-hidden border-4 border-yellow-300 mb-4">
+        <img id="preview-image" crossorigin="anonymous" class="hidden w-full h-full object-cover transition-all duration-500" />
+      </div>
+      <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
+      <div id="loading-indicator" class="mt-4 hidden">
+        <div class="mx-auto w-6 h-6 border-4 border-sky-300 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    </div>
   </div>
-</section><script>
-  const categoryIcons = {
-    "Potty Training": "https://img.icons8.com/color/96/toilet-training.png",
-    "Adventure": "https://img.icons8.com/color/96/trekking.png",
-    "Get to Know Names in the Family": "https://img.icons8.com/color/96/family.png",
-    "Get to Know the Neighborhood": "https://img.icons8.com/color/96/city.png",
-    "Bedtime Routine": "https://img.icons8.com/color/96/sleeping-in-bed.png",
-    "First Day of School": "https://img.icons8.com/color/96/school.png",
-    "Learning ABCs": "https://img.icons8.com/color/96/abc.png",
-    "Counting and Numbers": "https://img.icons8.com/color/96/numbers.png",
-    "Healthy Eating": "https://img.icons8.com/color/96/salad.png",
-    "Brushing Teeth": "https://img.icons8.com/color/96/toothbrush.png",
-    "Manners and Etiquette": "https://img.icons8.com/color/96/handshake.png",
-    "Sharing and Kindness": "https://img.icons8.com/color/96/gift.png",
-    "Making New Friends": "https://img.icons8.com/color/96/conference-call.png",
-    "Dealing with Emotions": "https://img.icons8.com/color/96/happy--v1.png",
-    "Going to the Doctor": "https://img.icons8.com/color/96/stethoscope.png",
-    "Visiting the Dentist": "https://img.icons8.com/color/96/tooth.png",
-    "Exploring Nature": "https://img.icons8.com/color/96/forest.png",
-    "Animal Adventures": "https://img.icons8.com/color/96/lion.png",
-    "Traveling and Exploring New Places": "https://img.icons8.com/color/96/globe.png",
-    "Learning Colors and Shapes": "https://img.icons8.com/color/96/geometry.png",
-    "Music and Rhythm": "https://img.icons8.com/color/96/musical-notes.png",
-    "Sports and Outdoor Play": "https://img.icons8.com/color/96/soccer-ball.png",
-    "Building and Construction": "https://img.icons8.com/color/96/crane.png",
-    "Superhero Adventures": "https://img.icons8.com/color/96/superhero.png",
-    "Magic and Fantasy": "https://img.icons8.com/color/96/magic-wand.png",
-    "Science Experiments at Home": "https://img.icons8.com/color/96/test-tube.png",
-    "Weather and Seasons": "https://img.icons8.com/color/96/sun.png",
-    "Under the Sea": "https://img.icons8.com/color/96/dolphin.png",
-    "Space Exploration": "https://img.icons8.com/color/96/rocket.png",
-    "Dinosaurs and Prehistoric Times": "https://img.icons8.com/color/96/dinosaur.png",
-    "Fairy Tales and Legends": "https://img.icons8.com/color/96/fairy.png",
-    "Holiday Celebrations": "https://img.icons8.com/color/96/christmas-star.png",
-    "Helping Around the House": "https://img.icons8.com/color/96/vacuum-cleaner.png",
-    "Camping and Outdoor Adventures": "https://img.icons8.com/color/96/camping-tent.png",
-    "Gardening and Plants": "https://img.icons8.com/color/96/gardening.png",
-    "Learning About Different Cultures": "https://img.icons8.com/color/96/earth-planet.png",
-    "Transportation and Vehicles": "https://img.icons8.com/color/96/car--v1.png",
-    "Story of My Birth": "https://img.icons8.com/color/96/baby.png",
-    "Fun with Pets": "https://img.icons8.com/color/96/dog.png",
-    "Birthday Party Planning": "https://img.icons8.com/color/96/birthday-cake.png",
-    "Baking and Cooking with Family": "https://img.icons8.com/color/96/bread.png",
-    "Art and Craft Projects": "https://img.icons8.com/color/96/paint-palette.png",
-    "Learning about Jobs and Careers": "https://img.icons8.com/color/96/briefcase.png",
-    "Visiting Grandparents": "https://img.icons8.com/color/96/elderly-person.png",
-    "Exploring the Farm": "https://img.icons8.com/color/96/farm.png",
-    "Zoo and Safari Adventures": "https://img.icons8.com/color/96/zebra.png",
-    "Aquarium and Ocean Life": "https://img.icons8.com/color/96/fish.png",
-    "Mindfulness and Relaxation": "https://img.icons8.com/color/96/lotus-position.png",
-    "Going to the Library": "https://img.icons8.com/color/96/books.png",
-    "Imagination and Creativity Stories": "https://img.icons8.com/color/96/light-on.png"
-  };
+</section>
 
-  const categories = Object.keys(categoryIcons);
-  const grid = document.getElementById("categoryGrid");
-  const search = document.getElementById("categorySearch");
+<!-- Script -->
+<script>
+  const previewName = document.getElementById("preview-name");
+  const previewImage = document.getElementById("preview-image");
+  const loadingIndicator = document.getElementById("loading-indicator");
 
-  function renderCategories(filter = "") {
-    grid.innerHTML = "";
-    Object.entries(categoryIcons).forEach(([category, icon]) => {
-      const matched = category.toLowerCase().includes(filter.toLowerCase());
-      categoryIcons[category] = icon; // keep icon mapping
-    });
-
-    const themes = {
-      "Learning": ["Learning ABCs", "Counting and Numbers", "Learning Colors and Shapes", "Learning about Jobs and Careers", "Learning About Different Cultures"],
-      "Health & Hygiene": ["Potty Training", "Healthy Eating", "Brushing Teeth", "Going to the Doctor", "Visiting the Dentist"],
-      "Daily Routines": ["Bedtime Routine", "First Day of School", "Helping Around the House", "Going to the Library"],
-      "Emotions & Social": ["Manners and Etiquette", "Sharing and Kindness", "Making New Friends", "Dealing with Emotions", "Mindfulness and Relaxation"],
-      "Adventure & Exploration": ["Adventure", "Traveling and Exploring New Places", "Exploring Nature", "Zoo and Safari Adventures", "Under the Sea", "Space Exploration", "Aquarium and Ocean Life", "Exploring the Farm", "Camping and Outdoor Adventures"],
-      "Creativity & Imagination": ["Art and Craft Projects", "Imagination and Creativity Stories", "Magic and Fantasy", "Superhero Adventures", "Fairy Tales and Legends"],
-      "Celebration & Life Events": ["Birthday Party Planning", "Holiday Celebrations", "Story of My Birth", "Visiting Grandparents"],
-      "Animals & Pets": ["Animal Adventures", "Fun with Pets", "Dinosaurs and Prehistoric Times"],
-      "Activities & Hobbies": ["Music and Rhythm", "Sports and Outdoor Play", "Baking and Cooking with Family", "Gardening and Plants", "Building and Construction"],
-      "Family & Community": ["Get to Know Names in the Family", "Get to Know the Neighborhood", "Transportation and Vehicles"]
-    };
-
-    Object.entries(themes).forEach(([theme, categoryList]) => {
-      const filtered = categoryList.filter(cat => cat.toLowerCase().includes(filter.toLowerCase()));
-      if (filtered.length === 0) return;
-
-      const header = document.createElement("h3");
-      header.className = "text-xl font-bold text-sky-700 text-left col-span-full mt-8 mb-2";
-      header.textContent = theme;
-      grid.appendChild(header);
-
-      filtered.forEach(cat => {
-        const icon = categoryIcons[cat] || "https://img.icons8.com/color/96/book.png";
-        const item = document.createElement("a");
-        item.href = `create.html?category=${encodeURIComponent(cat)}`;
-        item.className = "bg-sky-100 hover:bg-sky-200 p-4 rounded-xl shadow transition transform hover:scale-105 block animate-on-scroll";
-        item.innerHTML = `
-          <div class="text-center">
-            <img src="${icon}" alt="${cat}" class="mx-auto mb-3"/>
-            <h3 class="text-lg font-semibold text-sky-700">${cat}</h3>
-          </div>
-        `;
-        grid.appendChild(item);
-      });
-    });
+  function updatePreviewName() {
+    const nameInput = document.getElementById("child-name").value;
+    previewName.textContent = nameInput || "Your Child's Name";
   }
 
-  search.addEventListener("input", () => renderCategories(search.value));
-  document.addEventListener("DOMContentLoaded", () => renderCategories());
+  uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
+    const imageUrl = info.cdnUrl;
+    previewImage.src = imageUrl;
+    previewImage.classList.remove("hidden");
+    previewName.textContent = "Generating magical avatar…";
+    loadingIndicator.classList.remove("hidden");
+
+    const res = await fetch("/api/generate-avatar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: imageUrl })
+    });
+
+    const { id } = await res.json();
+    let outputUrl = null;
+    while (!outputUrl) {
+      await new Promise(r => setTimeout(r, 2500));
+      const poll = await fetch(`/api/poll-avatar?id=${id}`);
+      const result = await poll.json();
+      if (result.status === "succeeded") {
+        outputUrl = result.output[0];
+      } else if (result.status === "failed") {
+        previewName.textContent = "Avatar generation failed. Please try again.";
+        loadingIndicator.classList.add("hidden");
+        return;
+      }
+    }
+
+    previewImage.src = outputUrl;
+    previewImage.classList.remove("hidden");
+    previewName.textContent = "Your Magical Avatar";
+    loadingIndicator.classList.add("hidden");
+  });
 </script>
 
-</section><!-- Footer Section --><footer class="bg-white py-10 border-t mt-20">
-  <div class="container mx-auto px-6 text-center text-gray-600 text-sm">
-    <div class="mb-4">
-      <span class="text-xl font-bold text-blue-500">MagicTales</span> © 2025. All Rights Reserved.
-    </div>
-    <div class="flex justify-center space-x-6">
-      <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook-new.png" alt="Facebook"></a>
-      <a href="#"><img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram"></a>
-      <a href="#"><img src="https://img.icons8.com/ios-filled/24/pinterest.png" alt="Pinterest"></a>
-    </div>
-  </div>
-</footer></body>
+</body>
 </html>
