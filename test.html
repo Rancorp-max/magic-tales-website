@@ -41,6 +41,109 @@
     </div>
   </div>
 </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MagicTales – Personalized Storybooks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeInUp 1s ease-out forwards;
+    }
+    .animate-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); }
+      50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+    }
+    .wizard-step {
+      display: none;
+    }
+    .wizard-step.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-800 scroll-smooth">
+
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center text-center px-6 bg-cover bg-center" style="background-image: url('./hero-image.png');">
+  <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70 z-0"></div>
+  <div class="relative z-10 max-w-3xl mx-auto text-white">
+    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4 drop-shadow">Bring Your Child's Adventures to Life!</h1>
+    <p class="text-lg sm:text-xl mb-24 drop-shadow">Create a personalized storybook starring your child, full of magic, wonder, and adventure.</p>
+    <div class="bg-white/30 backdrop-blur-lg p-6 rounded-2xl shadow-xl max-w-xl mx-auto space-y-4">
+      <h2 class="text-xl font-semibold text-sky-600">✨ Get 50% Off at Launch</h2>
+      <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4">
+        <input type="email" name="email" required placeholder="Your email address"
+          class="w-full px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-300 bg-white/60">
+        <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full transition">Notify Me</button>
+      </form>
+      <p class="text-sm text-gray-700">We’ll email your discount code once we launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Personalization Wizard -->
+<section class="py-24 bg-white text-center">
+  <div class="max-w-xl mx-auto px-6 bg-white rounded-3xl shadow-2xl p-10 space-y-8">
+    <div id="step-1" class="wizard-step active">
+      <h2 class="text-2xl font-bold text-sky-600 mb-4">Step 1: About Your Child</h2>
+      <input type="text" placeholder="Child's Name" class="w-full px-4 py-3 mb-3 border border-gray-300 rounded-xl" />
+      <input type="number" placeholder="Child's Age" class="w-full px-4 py-3 mb-3 border border-gray-300 rounded-xl" />
+      <button class="next-step bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full">Next</button>
+    </div>
+
+    <div id="step-2" class="wizard-step">
+      <h2 class="text-2xl font-bold text-sky-600 mb-4">Step 2: Upload Photo</h2>
+      <input type="file" accept="image/*" class="w-full px-4 py-3 mb-3 border border-gray-300 rounded-xl" />
+      <p class="text-sm text-gray-500 mb-4">We'll delete the photo after creating the magical character.</p>
+      <button class="prev-step text-sky-500 underline mr-4">Back</button>
+      <button class="next-step bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full">Next</button>
+    </div>
+
+    <div id="step-3" class="wizard-step">
+      <h2 class="text-2xl font-bold text-sky-600 mb-4">Step 3: Get 50% Off</h2>
+      <input type="email" placeholder="Your Email Address" class="w-full px-4 py-3 mb-4 border border-gray-300 rounded-xl" />
+      <button class="prev-step text-sky-500 underline mr-4">Back</button>
+      <button class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full">Submit</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const steps = document.querySelectorAll('.wizard-step');
+  let currentStep = 0;
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
+    });
+  }
+  document.querySelectorAll('.next-step').forEach(btn => btn.addEventListener('click', () => {
+    currentStep = Math.min(currentStep + 1, steps.length - 1);
+    showStep(currentStep);
+  }));
+  document.querySelectorAll('.prev-step').forEach(btn => btn.addEventListener('click', () => {
+    currentStep = Math.max(currentStep - 1, 0);
+    showStep(currentStep);
+  }));
+  showStep(currentStep);
+</script>
+
+<!-- Existing Sections Remain Here -->
+<!-- How It Works -->
+<!-- Categories Section -->
+<!-- Footer Section -->
+
+</body>
+</html>
 
 <!-- How It Works -->
 <section class="py-24 bg-white text-center">
