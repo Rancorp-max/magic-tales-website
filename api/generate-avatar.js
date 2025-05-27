@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       input: {
         image,
         style: "Video game",
-        prompt: "a child in a magical storybook with a castle in the background",
+        prompt: "a child in a magical storybook with a beautiful castle on a mountain",
         instant_id_strength: 0.8
       }
     })
