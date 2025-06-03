@@ -48,7 +48,7 @@
             <input type="file" accept="image/*" id="photo-upload" class="hidden">
             <label for="photo-upload" class="cursor-pointer text-sky-600 font-medium hover:underline">Click to upload</label>
             <img id="photo-preview" class="hidden mt-4 w-24 h-24 rounded-full object-cover mx-auto">
-            <p class="text-xs text-gray-500 mt-2">Used only to generate an avatar. Deleted after creation.</p>
+            <p class="text-xs text-gray-500 mt-2">Used only to generate a story image. Deleted after creation.</p>
           </div>
         </div>
 
@@ -95,11 +95,11 @@
 
     <!-- Live Preview Panel -->
     <div class="bg-white/80 rounded-3xl shadow-xl p-8 text-center">
-      <h3 class="text-2xl font-bold text-sky-600 mb-4">Live Book Preview ✨</h3>
-      <div class="w-32 h-32 rounded-full mx-auto bg-white shadow-inner mb-4 overflow-hidden">
-        <img id="preview-image" class="hidden w-full h-full object-cover">
+      <h3 class="text-2xl font-bold text-sky-600 mb-4">Live Story Image Preview ✨</h3>
+      <div class="w-full h-[20rem] mx-auto bg-white border-2 border-dashed border-sky-300 rounded-xl flex items-center justify-center">
+        <img id="preview-image" class="hidden w-full h-full object-cover rounded-xl">
       </div>
-      <div class="text-xl font-semibold text-sky-600" id="preview-name">Your Child's Name</div>
+      <div class="text-xl font-semibold text-sky-600 mt-4" id="preview-name">Your Child's Name</div>
     </div>
   </div>
 </section>
@@ -110,16 +110,35 @@ const photoPreview = document.getElementById('photo-preview');
 const previewImage = document.getElementById('preview-image');
 const previewName = document.getElementById('preview-name');
 
-photoUpload.addEventListener('change', function () {
+photoUpload.addEventListener('change', async function () {
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function (e) {
-      photoPreview.src = e.target.result;
-      previewImage.src = e.target.result;
+    reader.onload = async function (e) {
+      const base64 = e.target.result;
+      photoPreview.src = base64;
+      previewName.textContent = "Generating story image...";
       photoPreview.classList.remove('hidden');
-      previewImage.classList.remove('hidden');
-    }
+      previewImage.classList.add('hidden');
+
+      const res = await fetch("/api/generate-avatar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image: base64,
+          prompt: "storybook illustration of a smiling child in a colorful magical forest"
+        })
+      });
+
+      const { image } = await res.json();
+      if (image) {
+        previewImage.src = image;
+        previewImage.classList.remove("hidden");
+        previewName.textContent = "Your Magical Story Image";
+      } else {
+        previewName.textContent = "Failed to generate image.";
+      }
+    };
     reader.readAsDataURL(file);
   }
 });
