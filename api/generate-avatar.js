@@ -1,24 +1,32 @@
 // /api/generate-avatar.js
+
 export default async function handler(req, res) {
-  const { image } = req.body;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Only POST requests allowed" });
+  }
 
-  const response = await fetch("https://api.replicate.com/v1/predictions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      version: "a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
-      input: {
-        image,
-        style: "Video game",
-        prompt: "a child in a magical storybook with a beautiful castle on a mountain",
-        instant_id_strength: 0.8
-      }
-    })
-  });
+  const { image, prompt } = req.body;
 
-  const prediction = await response.json();
-  res.status(200).json(prediction);
+  try {
+    const response = await fetch("https://api.replicate.com/v1/predictions", {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        version: "ec3176b3caefc364985174bd58f97aa91c9d07f14437a4dfcbfc084efb58071e", // flux-kontext-max
+        input: {
+          input_image: image,
+          prompt: prompt || "storybook portrait with magical atmosphere"
+        }
+      })
+    });
+
+    const prediction = await response.json();
+    res.status(200).json(prediction);
+  } catch (error) {
+    console.error("Replicate error:", error);
+    res.status(500).json({ error: "Failed to generate image" });
+  }
 }
