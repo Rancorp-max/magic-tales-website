@@ -1,224 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MagicTales – Personalized Storybooks</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MagicTales Storybook Creator</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418";
-  </script>
-  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
   <style>
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    body {
+      font-family: 'Baloo 2', cursive;
     }
-    .fade-in {
-      animation: fadeInUp 1s ease-out forwards;
+    .glass {
+      background-color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
     }
-    .animate-glow {
-      animation: pulseGlow 2s ease-in-out infinite;
+    .animate-gradient {
+      background: linear-gradient(270deg, #38bdf8, #c084fc, #f472b6);
+      background-size: 600% 600%;
+      animation: gradientBG 10s ease infinite;
     }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); }
-      50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-    }
-    .wizard-step {
-      display: none;
-    }
-    .wizard-step.active {
-      display: block;
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-sky-50 to-white text-gray-800 scroll-smooth">
+<body class="bg-gradient-to-tr from-indigo-100 to-pink-100 min-h-screen text-gray-800">
 
 <!-- Header -->
-<header class="sticky top-0 bg-white shadow-md z-50">
-  <div class="container mx-auto flex items-center justify-between py-4 px-6">
-    <div class="text-2xl font-bold text-sky-500">MagicTales</div>
-    <nav class="hidden md:flex space-x-8 text-lg">
-      <a href="#howitworks" class="hover:text-sky-500">How It Works</a>
-      <a href="#categories" class="hover:text-sky-500">Categories</a>
-      <a href="#personalize" class="hover:text-sky-500">Personalize</a>
+<header class="sticky top-0 bg-white/90 shadow-lg z-50 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-3xl font-extrabold text-sky-500 tracking-tight">MagicTales</div>
+    <nav class="hidden md:flex space-x-6 text-lg font-medium">
+      <a href="/" class="text-gray-600 hover:text-sky-600">Home</a>
+      <a href="#howitworks" class="text-gray-600 hover:text-sky-600">How It Works</a>
+      <a href="#categories" class="text-gray-600 hover:text-sky-600">Shop Books</a>
     </nav>
   </div>
 </header>
 
-<!-- Hero Section -->
-<section class="relative h-screen flex items-center justify-center text-center px-6 bg-cover bg-center" style="background-image: url('./hero-image.png');">
-  <div class="absolute inset-0 bg-gradient-to-b from-blue-400/40 to-blue-900/70 z-0"></div>
-  <div class="relative z-10 max-w-3xl mx-auto text-white">
-    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4 drop-shadow">Bring Your Child's Adventures to Life!</h1>
-    <p class="text-lg sm:text-xl mb-24 drop-shadow">Create a personalized storybook starring your child, full of magic, wonder, and adventure.</p>
-    <div class="bg-white/30 backdrop-blur-lg p-6 rounded-2xl shadow-xl max-w-xl mx-auto space-y-4">
-      <h2 class="text-xl font-semibold text-sky-600">✨ Get 50% Off at Launch</h2>
-      <form action="https://formspree.io/f/YOURCODE" method="POST" class="flex flex-col sm:flex-row gap-4">
-        <input type="email" name="email" required placeholder="Your email address"
-          class="w-full px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-300 bg-white/60">
-        <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full transition">Notify Me</button>
-      </form>
-      <p class="text-sm text-gray-700">We’ll email your discount code once we launch.</p>
+<!-- Hero -->
+<section class="text-center py-20 px-6 bg-white/40 glass rounded-b-3xl shadow-xl">
+  <h1 class="text-5xl font-extrabold text-sky-600 mb-4">Create Your Magical Storybook</h1>
+  <p class="text-xl text-gray-700 max-w-2xl mx-auto">Upload a photo, personalize your hero, and watch the story unfold with stunning AI-generated illustrations.</p>
+</section>
+
+<!-- Step Wizard -->
+<section class="py-16 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+  <!-- Form -->
+  <div class="glass p-8 rounded-3xl shadow-xl space-y-8">
+    <h2 class="text-2xl font-bold text-sky-600 text-center">Step 1: Personalize Your Hero</h2>
+
+    <div>
+      <label class="block font-semibold mb-1">Upload a Photo</label>
+      <div class="bg-white p-4 rounded-xl border border-dashed border-sky-300 text-center">
+        <input type="file" accept="image/*" id="photo-upload" class="hidden">
+        <label for="photo-upload" class="cursor-pointer text-sky-600 font-medium hover:underline">Click to Upload</label>
+        <img id="photo-preview" class="hidden mt-4 w-24 h-24 rounded-full mx-auto object-cover">
+        <p class="text-xs text-gray-500 mt-2">We only use this to generate your magical illustration.</p>
+      </div>
     </div>
+
+    <div class="grid grid-cols-1 gap-4">
+      <input id="child-name" type="text" placeholder="Child's Name" class="w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()">
+      <input type="number" placeholder="Age" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+      <input type="text" placeholder="Favorite Color" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+      <textarea rows="2" placeholder="Dedication Message" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <select class="border border-gray-300 rounded-xl px-4 py-3">
+        <option disabled selected>Skin Tone</option>
+        <option>Light</option><option>Medium</option><option>Dark</option>
+      </select>
+      <select class="border border-gray-300 rounded-xl px-4 py-3">
+        <option disabled selected>Hair Style</option>
+        <option>Short</option><option>Long</option><option>Curly</option><option>Straight</option>
+      </select>
+    </div>
+
+    <div class="pt-4 text-center">
+      <input name="email" type="email" required placeholder="Enter your email for 50% off" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
+      <button type="submit" class="bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-indigo-500 hover:to-sky-500 text-white font-bold px-6 py-3 rounded-full shadow-lg">Get Discount & Continue</button>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="p-8 rounded-3xl bg-white/70 shadow-2xl flex flex-col items-center text-center">
+    <h2 class="text-2xl font-bold text-sky-600 mb-6">Live Preview ✨</h2>
+    <div class="w-full h-[20rem] flex items-center justify-center bg-white border border-dashed border-sky-300 rounded-xl overflow-hidden">
+      <img id="preview-image" class="hidden w-full h-full object-cover rounded-xl">
+    </div>
+    <div class="text-xl font-semibold text-sky-600 mt-4" id="preview-name">Your Child's Name</div>
   </div>
 </section>
 
-<!-- How It Works Section -->
-<section id="howitworks" class="py-24 bg-sky-50 text-center">
-  <h2 class="text-3xl font-bold text-sky-600 mb-12">How It Works</h2>
-  <div class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto px-6">
-    <div>
-      <div class="text-5xl mb-4">📷</div>
-      <h3 class="text-xl font-semibold mb-2">Upload a Photo</h3>
-      <p class="text-gray-600">Start by uploading a clear photo of your child. This helps create a magical character just like them!</p>
-    </div>
-    <div>
-      <div class="text-5xl mb-4">🎨</div>
-      <h3 class="text-xl font-semibold mb-2">Customize the Story</h3>
-      <p class="text-gray-600">Pick a theme, personalize the name, age, and message, and watch the story come to life.</p>
-    </div>
-    <div>
-      <div class="text-5xl mb-4">📖</div>
-      <h3 class="text-xl font-semibold mb-2">Receive Your Book</h3>
-      <p class="text-gray-600">Download or print your beautifully illustrated storybook featuring your child's magical journey.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Categories Section -->
-<section id="categories" class="py-24 bg-white text-center">
-  <h2 class="text-3xl font-bold text-sky-600 mb-12">Book Categories</h2>
-  <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto px-6">
-    <div class="p-4 bg-sky-50 rounded-xl shadow hover:shadow-lg">
-      <div class="text-4xl mb-2">🧙‍♀️</div>
-      <h4 class="font-semibold">Magic & Fantasy</h4>
-    </div>
-    <div class="p-4 bg-sky-50 rounded-xl shadow hover:shadow-lg">
-      <div class="text-4xl mb-2">🧸</div>
-      <h4 class="font-semibold">Bedtime Stories</h4>
-    </div>
-    <div class="p-4 bg-sky-50 rounded-xl shadow hover:shadow-lg">
-      <div class="text-4xl mb-2">🦖</div>
-      <h4 class="font-semibold">Dinosaur Adventures</h4>
-    </div>
-    <div class="p-4 bg-sky-50 rounded-xl shadow hover:shadow-lg">
-      <div class="text-4xl mb-2">🎂</div>
-      <h4 class="font-semibold">Birthday Surprises</h4>
-    </div>
-  </div>
-</section>
-
-<!-- Personalization Wizard -->
-<section id="personalize" class="py-24 bg-sky-100 text-center">
-  <!-- Wizard Content kept as-is -->
-</section>
-
-<!-- Script (same as before) -->
+<!-- Scripts -->
 <script>
-  const steps = document.querySelectorAll('.wizard-step');
-  let currentStep = 0;
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle('active', i === index);
-    });
-  }
-  document.querySelectorAll('.next-step').forEach(btn => btn.addEventListener('click', () => {
-    currentStep = Math.min(currentStep + 1, steps.length - 1);
-    showStep(currentStep);
-  }));
-  document.querySelectorAll('.prev-step').forEach(btn => btn.addEventListener('click', () => {
-    currentStep = Math.max(currentStep - 1, 0);
-    showStep(currentStep);
-  }));
-  showStep(currentStep);
-
-  const previewName = document.getElementById("preview-name");
-  const originalPhoto = document.getElementById("original-photo");
-  const replicateAvatar = document.getElementById("replicate-avatar");
-  const loadingIndicator = document.getElementById("loading-indicator");
+  const photoUpload = document.getElementById('photo-upload');
+  const photoPreview = document.getElementById('photo-preview');
+  const previewImage = document.getElementById('preview-image');
+  const previewName = document.getElementById('preview-name');
 
   function updatePreviewName() {
-    const nameInput = document.getElementById("child-name").value;
-    if (previewName) previewName.textContent = nameInput || "Your Child's Name";
+    const nameInput = document.getElementById('child-name').value;
+    previewName.textContent = nameInput || "Your Child's Name";
   }
 
-  uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
-    const imageUrl = info.cdnUrl;
-    originalPhoto.src = imageUrl;
-    originalPhoto.classList.remove("hidden");
-    replicateAvatar.classList.add("hidden");
-    loadingIndicator.classList.remove("hidden");
+  photoUpload.addEventListener('change', async function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async function (e) {
+        const base64 = e.target.result;
+        photoPreview.src = base64;
+        previewName.textContent = "Generating story image...";
+        photoPreview.classList.remove('hidden');
+        previewImage.classList.add('hidden');
 
-    const res = await fetch("/api/generate-avatar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image: imageUrl })
-    });
+        const res = await fetch("/api/generate-avatar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            image: base64,
+            prompt: "storybook illustration of a smiling child in a colorful magical forest"
+          })
+        });
 
-    const { id } = await res.json();
-    let outputUrl = null;
-    let attempts = 0;
-    while (!outputUrl && attempts < 12) {
-      await new Promise(r => setTimeout(r, 2500));
-      const poll = await fetch(`/api/poll-avatar?id=${id}`);
-      const result = await poll.json();
-
-      if (result.status === "succeeded") {
-        outputUrl = result.output[0];
-        break;
-      } else if (result.status === "failed") {
-        loadingIndicator.textContent = "Avatar generation failed.";
-        return;
-      }
-      attempts++;
+        const { image } = await res.json();
+        if (image) {
+          previewImage.src = image;
+          previewImage.classList.remove("hidden");
+          previewName.textContent = "Your Magical Story Image";
+        } else {
+          previewName.textContent = "Failed to generate image.";
+        }
+      };
+      reader.readAsDataURL(file);
     }
-
-    if (!outputUrl) {
-      loadingIndicator.textContent = "Timed out. Try again.";
-      return;
-    }
-
-    replicateAvatar.src = outputUrl;
-    replicateAvatar.classList.remove("hidden");
-    loadingIndicator.classList.add("hidden");
-  });
-</script>
-<!-- Email Signup Modal -->
-<div id="emailModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-  <div class="bg-purple-600 text-white rounded-3xl max-w-md w-full p-8 mx-4 shadow-2xl relative">
-    <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-xl">&times;</button>
-    <h2 class="text-xl font-bold text-center mb-2">Save 50% On Personalized Books</h2>
-    <p class="text-center text-sm mb-6">Sign up to receive your discount code</p>
-
-    <form action="https://formspree.io/f/YOURCODE" method="POST" class="space-y-4">
-      <label class="block text-sm font-semibold">Email:</label>
-      <input type="email" name="email" required placeholder="your@email.com"
-        class="w-full px-4 py-3 rounded-xl text-purple-900 font-medium focus:outline-none focus:ring-2 focus:ring-yellow-300"/>
-
-      <button type="submit"
-        class="w-full bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-semibold py-3 rounded-full transition text-sm tracking-wide">
-        SIGN ME UP!
-      </button>
-    </form>
-
-    <p onclick="closeModal()" class="text-center mt-4 underline text-sm cursor-pointer text-white/70 hover:text-white">
-      No, thanks
-    </p>
-  </div>
-</div>
-
-<script>
-  function showModal() {
-    document.getElementById("emailModal").classList.remove("hidden");
-  }
-
-  function closeModal() {
-    document.getElementById("emailModal").classList.add("hidden");
-  }
-
-  window.addEventListener("load", () => {
-    setTimeout(showModal, 5000); // Show after 5s
   });
 </script>
 
