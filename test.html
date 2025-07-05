@@ -126,7 +126,7 @@
           });
 
           const { image } = await res.json();
-          if (image) {
+          if (image) {  
             previewImage.src = image;
             previewImage.classList.remove("hidden");
             previewName.textContent = "Your Magical Story Image";
