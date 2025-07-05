@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     }
 
     const prediction = await response.json();
-    const resultUrl = prediction.output;
+    const resultUrl = Array.isArray(prediction.output) ? prediction.output[0] : prediction.output;
 
     res.status(200).json({ image: resultUrl });
   } catch (error) {
