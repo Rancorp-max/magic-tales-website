@@ -15,10 +15,10 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: "ec3176b3caefc364985174bd58f97aa91c9d07f14437a4dfcbfc084efb58071e", // flux-kontext-max
+        version: "95e8698ad794d3d8c8c4c60d685cf5a36092753c0194b44273540470b26fa51a", // flux-kontext-pro
         input: {
           input_image: image,
-          prompt: prompt || "storybook portrait with magical atmosphere"
+          prompt: prompt || "storybook portrait of a smiling child in a magical setting"
         }
       })
     });
