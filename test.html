@@ -94,65 +94,79 @@
   </section>
 
   <!-- Scripts -->
-  <script>
-    const photoUpload = document.getElementById('photo-upload');
-    const photoPreview = document.getElementById('photo-preview');
-    const previewImage = document.getElementById('preview-image');
-    const previewName = document.getElementById('preview-name');
+<script>
+  const photoUpload = document.getElementById('photo-upload');
+  const photoPreview = document.getElementById('photo-preview');
+  const previewImage = document.getElementById('preview-image');
+  const previewName = document.getElementById('preview-name');
 
-    function updatePreviewName() {
-      const nameInput = document.getElementById('child-name').value;
-      previewName.textContent = nameInput || "Your Child's Name";
+  let avatarImageUrl = null;
+
+  function updatePreviewName() {
+    const nameInput = document.getElementById('child-name').value;
+    previewName.textContent = nameInput || "Your Child's Name";
+  }
+
+  photoUpload.addEventListener('change', async function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async function (e) {
+        const base64 = e.target.result;
+        photoPreview.src = base64;
+        photoPreview.classList.remove('hidden');
+        previewImage.classList.add('hidden');
+        previewName.textContent = "Generating magic...";
+
+        const res = await fetch("/api/generate-avatar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            image: base64,
+            prompt: "storybook illustration of a smiling child in a colorful magical forest"
+          })
+        });
+
+        const { image } = await res.json();
+        if (image) {
+          avatarImageUrl = image;
+          previewImage.src = image;
+          previewImage.classList.remove("hidden");
+          previewName.textContent = "Your Magical Story Image";
+          loadBookWithAvatar(); // Load flipbook using this avatar image
+        } else {
+          previewName.textContent = "Failed to generate image.";
+        }
+      };
+      reader.readAsDataURL(file);
     }
+  });
 
-    photoUpload.addEventListener('change', async function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = async function (e) {
-          const base64 = e.target.result;
-          photoPreview.src = base64;
-          photoPreview.classList.remove('hidden');
-          previewImage.classList.add('hidden');
-          previewName.textContent = "Generating magic...";
+  function loadBookWithAvatar() {
+    const pages = [
+      "./hero5.png", // cover
+      avatarImageUrl || "https://via.placeholder.com/500x375.png?text=Page+2", // avatar
+      "https://via.placeholder.com/500x375.png?text=Page+3",
+      "https://via.placeholder.com/500x375.png?text=Page+4"
+    ];
 
-          const res = await fetch("/api/generate-avatar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              image: base64,
-              prompt: "storybook illustration of a smiling child in a colorful magical forest"
-            })
-          });
+    // Destroy old instance if it exists
+    const container = document.getElementById('book-preview');
+    container.innerHTML = ""; // clear old content
 
-          const { image } = await res.json();
-          if (image) {  
-            previewImage.src = image;
-            previewImage.classList.remove("hidden");
-            previewName.textContent = "Your Magical Story Image";
-          } else {
-            previewName.textContent = "Failed to generate image.";
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Flipbook Preview
-    const pageFlip = new St.PageFlip(document.getElementById('book-preview'), {
+    const pageFlip = new St.PageFlip(container, {
       width: 500,
       height: 375,
       showCover: true,
       mobileScrollSupport: false
     });
 
-    pageFlip.loadFromImages([
-      "./hero5.png",
-      "https://via.placeholder.com/500x375.png?text=Page+2",
-      "https://via.placeholder.com/500x375.png?text=Page+3",
-      "https://via.placeholder.com/500x375.png?text=Page+4"
-    ]);
-  </script>
+    pageFlip.loadFromImages(pages);
+  }
+
+  // Load default book on initial load
+  loadBookWithAvatar();
+</script>
 
 </body>
 </html>
