@@ -16,19 +16,24 @@ export default async function handler(req, res) {
   try {
     const results = await Promise.all(
       prompts.map(async (prompt) => {
-        const output = await replicate.run("black-forest-labs/flux-kontext-max", {
-          input: {
-            prompt,
-            input_image: image,
-          },
-        });
-        return output; // This is the URL of the generated image
+        const prediction = await replicate.run(
+          "black-forest-labs/flux-kontext-pro:95e8698ad794d3d8c8c4c60d685cf5a36092753c0194b44273540470b26fa51a",
+          {
+            input: {
+              prompt,
+              input_image: image,
+            },
+          }
+        );
+
+        // replicate.run returns the output array (typically just 1 image URL)
+        return Array.isArray(prediction) ? prediction[0] : prediction;
       })
     );
 
     res.status(200).json({ pages: results });
   } catch (err) {
-    console.error(err);
+    console.error("Story page generation error:", err);
     res.status(500).json({ error: "Failed to generate pages" });
   }
 }
