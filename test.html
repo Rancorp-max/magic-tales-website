@@ -61,7 +61,21 @@
       <div class="space-y-4">
         <input id="child-name" type="text" placeholder="Child's Name" class="w-full border border-gray-300 rounded-xl px-4 py-3">
         <input type="number" placeholder="Age" class="w-full border border-gray-300 rounded-xl px-4 py-3">
-        <input type="text" placeholder="Favorite Color" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+       <div>
+  <label for="favorite-color" class="block mb-1 font-semibold text-sm text-gray-700">Favorite Color</label>
+  <select id="favorite-color" class="w-full border border-gray-300 rounded-xl px-4 py-3 pr-10 bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-sky-300">
+    <option value="#f87171" style="color:#f87171;">🔴 Red</option>
+    <option value="#60a5fa" style="color:#60a5fa;">🔵 Blue</option>
+    <option value="#34d399" style="color:#34d399;">🟢 Green</option>
+    <option value="#fbbf24" style="color:#fbbf24;">🟡 Yellow</option>
+    <option value="#c084fc" style="color:#c084fc;">🟣 Purple</option>
+    <option value="#f472b6" style="color:#f472b6;">🌸 Pink</option>
+    <option value="#a3a3a3" style="color:#a3a3a3;">⚫ Gray</option>
+    <option value="#ffffff" style="color:#000;">⚪ White</option>
+    <option value="#000000" style="color:#fff;">⚫ Black</option>
+  </select>
+</div>
+
         <textarea rows="2" placeholder="Dedication Message" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
         <div class="grid md:grid-cols-2 gap-4">
           <select class="border border-gray-300 rounded-xl px-4 py-3">
