@@ -9,14 +9,14 @@ export default async function handler(req, res) {
     const response = await fetch("https://api.replicate.com/v1/models/black-forest-labs/flux-kontext-pro/predictions", {
       method: "POST",
       headers: {
-        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,  // ✅ Make sure this token is valid
         "Content-Type": "application/json",
         "Prefer": "wait"
       },
       body: JSON.stringify({
         input: {
-          prompt: prompt || "storybook portrait of a smiling child in a magical setting",
           input_image: image,
+          prompt: prompt || "storybook portrait of a smiling child in a magical setting",
           output_format: "jpg"
         }
       })
