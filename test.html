@@ -88,61 +88,74 @@
   </section>
 
   <!-- Scripts -->
-  <script>
-    const previewName = document.getElementById("preview-name");
-    const bookPreviewContainer = document.getElementById("book-preview");
-    const replicateImage = document.getElementById("replicate-image");
+<script>
+  const previewName = document.getElementById("preview-name");
+  const bookPreviewContainer = document.getElementById("book-preview");
+  const replicateImage = document.getElementById("replicate-image");
 
-    function updatePreviewName() {
-      const nameInput = document.getElementById("child-name").value;
-      if (previewName) previewName.textContent = nameInput || "Your Child's Name";
-    }
+  function updatePreviewName() {
+    const nameInput = document.getElementById("child-name").value;
+    if (previewName) previewName.textContent = nameInput || "Your Child's Name";
+  }
 
-    const pageFlip = new St.PageFlip(bookPreviewContainer, {
-      width: 500,
-      height: 375,
-      showCover: true,
-      mobileScrollSupport: false
-    });
-
-    // Set initial placeholder pages
-    const defaultPages = [
-      "https://via.placeholder.com/500x375.png?text=Cover",
-      "https://via.placeholder.com/500x375.png?text=Page+1",
-      "https://via.placeholder.com/500x375.png?text=Page+2",
-      "https://via.placeholder.com/500x375.png?text=Page+3"
-    ];
-    pageFlip.loadFromImages(defaultPages);
-
-    uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
-      const imageUrl = info.cdnUrl;
-
-      const res = await fetch("/api/generate-avatar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          image: imageUrl,
-          prompt: "storybook portrait of a smiling child in a magical setting"
-        })
+  // Initialize PageFlip once
+  let pageFlip = null;
+  function initializeFlipbook(pages) {
+    if (!pageFlip) {
+      pageFlip = new St.PageFlip(bookPreviewContainer, {
+        width: 500,
+        height: 375,
+        showCover: true,
+        mobileScrollSupport: false,
       });
+    }
+    pageFlip.loadFromImages(pages);
+  }
 
-      const data = await res.json();
-      const avatarUrl = data.image;
+  // Load default pages
+  const defaultPages = [
+    "https://via.placeholder.com/500x375.png?text=Cover",
+    "https://via.placeholder.com/500x375.png?text=Page+1",
+    "https://via.placeholder.com/500x375.png?text=Page+2",
+    "https://via.placeholder.com/500x375.png?text=Page+3"
+  ];
+  initializeFlipbook(defaultPages);
 
-      if (avatarUrl && typeof avatarUrl === "string") {
-        replicateImage.src = avatarUrl;
-        replicateImage.alt = "Generated avatar";
+  uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
+    const imageUrl = info.cdnUrl;
 
-        // Use avatar as page 1 of the flipbook
-        const pages = [
-          "https://via.placeholder.com/500x375.png?text=Cover",
-          avatarUrl,
-          "https://via.placeholder.com/500x375.png?text=Page+2",
-          "https://via.placeholder.com/500x375.png?text=Page+3"
-        ];
-        pageFlip.loadFromImages(pages);
-      }
+    // Show loading state
+    replicateImage.src = "";
+    replicateImage.alt = "Generating image...";
+
+    const res = await fetch("/api/generate-avatar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image: imageUrl,
+        prompt: "storybook portrait of a smiling child in a magical setting"
+      })
     });
-  </script>
+
+    const data = await res.json();
+    const avatarUrl = data.image;
+
+    if (avatarUrl && typeof avatarUrl === "string") {
+      replicateImage.src = avatarUrl;
+      replicateImage.alt = "Generated avatar";
+
+      // Replace book preview pages with avatar
+      const pages = [
+        "https://via.placeholder.com/500x375.png?text=Cover",
+        avatarUrl,
+        "https://via.placeholder.com/500x375.png?text=Page+2",
+        "https://via.placeholder.com/500x375.png?text=Page+3"
+      ];
+      pageFlip.loadFromImages(pages);
+    } else {
+      replicateImage.alt = "Failed to generate image.";
+    }
+  });
+</script>
 </body>
 </html>
