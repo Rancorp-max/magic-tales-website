@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         input: {
           input_image: image,
-          prompt: prompt || "storybook portrait of a smiling child in a magical setting",
+          prompt: prompt || "Make this image an illustration of a bustling, magical desert city with glowing towers and golden domes at sunset. A young hero (whose face is this) holding a glowing magic lamp stands beside a flying carpet, with a curious monkey and a princess in a jeweled gown nearby. The atmosphere is warm, mystical, and rich with detail—lanterns float, stars twinkle, and sand sparkles. The hero should resemble the uploaded image of a face. The hero should be a age appropriate within the context of the illustration, so remove any beard.",
           output_format: "jpg"
         }
       })
