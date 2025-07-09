@@ -1,131 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MagicTales - Personalized Storybook Creator</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-<script>
-UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418";
-</script>
-<style>
-body {
-font-family: 'Baloo 2', cursive;
-}
-.glass {
-background-color: rgba(255, 255, 255, 0.75);
-backdrop-filter: blur(14px);
-}
-.storybook-frame {
-border: 8px double #94a3b8;
-padding: 1.5rem;
-background: white;
-border-radius: 1.5rem;
-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MagicTales - Personalized Storybook Creator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <script>UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418";</script>
+  <style>
+    body { font-family: 'Baloo 2', cursive; }
+    .glass { background-color: rgba(255, 255, 255, 0.75); backdrop-filter: blur(14px); }
+  </style>
 </head>
 <body class="bg-gradient-to-tr from-indigo-100 to-pink-100 min-h-screen text-gray-800">
 
-<!-- Header -->
-<header class="sticky top-0 bg-white/90 shadow-lg z-50 backdrop-blur-md">
-<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-<div class="text-3xl font-extrabold text-sky-500">MagicTales</div>
-<nav class="hidden md:flex space-x-6 text-lg font-medium">
-<a href="/" class="text-gray-600 hover:text-sky-600">Home</a>
-<a href="#storybook" class="text-gray-600 hover:text-sky-600">Preview</a>
-</nav>
-</div>
-</header>
-
-<!-- Hero Section -->
-<section class="text-center py-16 px-6 bg-white/40 glass rounded-b-3xl shadow-xl">
-<h1 class="text-5xl font-extrabold text-sky-600 mb-4">Create Your Magical Storybook</h1>
-<p class="text-xl text-gray-700 max-w-2xl mx-auto">Upload a photo, personalize your hero, and see the magic unfold!</p>
-</section>
-
-<!-- Main Wizard Section -->
-<section class="py-16 px-6 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-
-<!-- Form Panel -->
-<div class="glass p-8 rounded-3xl shadow-xl space-y-6">
-<h2 class="text-2xl font-bold text-sky-600 text-center">Step 1: Personalize Your Hero</h2>
-
-<div class="text-center">
-<input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
-<p class="text-sm text-gray-500 mt-2">Your photo is only used to generate your character and is deleted after creation.</p>
-</div>
-
-<div class="space-y-4">
-<input id="child-name" type="text" placeholder="Child's Name" class="w-full border border-gray-300 rounded-xl px-4 py-3">
-<input type="number" placeholder="Age" class="w-full border border-gray-300 rounded-xl px-4 py-3">
-<div>
-<label for="favorite-color" class="block mb-1 font-semibold text-sm text-gray-700">Favorite Color</label>
-<select id="favorite-color" class="w-full border border-gray-300 rounded-xl px-4 py-3 pr-10 bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-sky-300">
-<option value="#f87171" style="color:#f87171;">🔴 Red</option>
-<option value="#60a5fa" style="color:#60a5fa;">🔵 Blue</option>
-<option value="#34d399" style="color:#34d399;">🟢 Green</option>
-<option value="#fbbf24" style="color:#fbbf24;">🟡 Yellow</option>
-<option value="#c084fc" style="color:#c084fc;">🟣 Purple</option>
-<option value="#f472b6" style="color:#f472b6;">🌸 Pink</option>
-<option value="#a3a3a3" style="color:#a3a3a3;">⚫ Gray</option>
-<option value="#ffffff" style="color:#000;">⚪ White</option>
-<option value="#000000" style="color:#fff;">⚫ Black</option>
-</select>
-</div>
-<textarea rows="2" placeholder="Dedication Message" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
-<div class="grid md:grid-cols-2 gap-4">
-
-</div>
-</div>
-<div class="pt-6 text-center">
-<input name="email" type="email" required placeholder="email" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-4">
-<button type="submit" class="bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-indigo-600 hover:to-sky-600 text-white font-bold px-6 py-3 rounded-full shadow-lg">Get Discount & Continue</button>
-</div>
-</div>
-
-<!-- Book Preview Panel -->
-<div class="p-8 rounded-3xl bg-white/70 shadow-2xl flex flex-col items-center text-center">
-<h2 class="text-2xl font-bold text-sky-600 mb-4">✨ Storybook Preview</h2>
-<div class="storybook-frame w-full max-w-[500px] h-[375px] flex items-center justify-center">
-        <img id="replicate-image" src="https://via.placeholder.com/500x375.png?text=Your+Hero+Will+Appear+Here" alt="Generated avatar will appear here" class="max-h-full max-w-full object-contain rounded-xl">
-        <img id="replicate-image" src="text=Your+Hero+Will+Appear+Here" alt="Generated avatar will appear here" class="max-h-full max-w-full object-contain rounded-xl">
-</div>
-      <p class="text-sm text-gray-500 mt-4">This is your personalized storybook page!</p>
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/90 shadow-lg z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-3xl font-extrabold text-sky-500">MagicTales</div>
+      <nav class="hidden md:flex space-x-6 text-lg font-medium">
+        <a href="#" class="text-gray-600 hover:text-sky-600">Home</a>
+        <a href="#categories" class="text-gray-600 hover:text-sky-600">Books</a>
+      </nav>
     </div>
-        </div>
-</section>
+  </header>
 
-<!-- Script to Handle Upload + Avatar Generation -->
-<script>
-uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
-const imageUrl = info.cdnUrl;
-const replicateImage = document.getElementById("replicate-image");
+  <!-- Hero Section -->
+  <section class="relative">
+    <img src="https://images.unsplash.com/photo-1508948956644-0017e845d797?auto=format&fit=crop&w=1600&q=80" alt="Hero" class="w-full h-96 object-cover">
+    <div class="absolute inset-0 flex flex-col justify-center items-center bg-black/40 text-white text-center px-4">
+      <h1 class="text-5xl font-extrabold drop-shadow">Create a Magical Storybook</h1>
+      <p class="text-xl mt-4 max-w-xl">Choose a story, upload your child's photo, and generate personalized pages with AI!</p>
+    </div>
+  </section>
 
-replicateImage.src = "";
-replicateImage.alt = "Generating magic...";
+  <!-- Category Selection -->
+  <section id="categories" class="py-16 px-6 max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-sky-600 mb-6">Pick a Book Theme</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div onclick="selectCategory('bedtime')" class="cursor-pointer bg-white rounded-xl shadow-lg p-4 hover:ring-2 hover:ring-sky-400 transition">
+        <img src="https://via.placeholder.com/300x200.png?text=Bedtime+Adventure" class="rounded-md mb-2 mx-auto"/>
+        <h3 class="text-xl font-semibold text-sky-700">Bedtime Adventure</h3>
+        <p class="text-sm text-gray-600">A gentle journey into dreamland with your child as the star.</p>
+      </div>
+      <div onclick="selectCategory('space')" class="cursor-pointer bg-white rounded-xl shadow-lg p-4 hover:ring-2 hover:ring-sky-400 transition">
+        <img src="https://via.placeholder.com/300x200.png?text=Space+Explorer" class="rounded-md mb-2 mx-auto"/>
+        <h3 class="text-xl font-semibold text-sky-700">Space Explorer</h3>
+        <p class="text-sm text-gray-600">Zoom through galaxies and save the stars!</p>
+      </div>
+      <div onclick="selectCategory('jungle')" class="cursor-pointer bg-white rounded-xl shadow-lg p-4 hover:ring-2 hover:ring-sky-400 transition">
+        <img src="https://via.placeholder.com/300x200.png?text=Jungle+Quest" class="rounded-md mb-2 mx-auto"/>
+        <h3 class="text-xl font-semibold text-sky-700">Jungle Quest</h3>
+        <p class="text-sm text-gray-600">A wild, colorful adventure through magical forests.</p>
+      </div>
+    </div>
+  </section>
 
-const res = await fetch("/api/generate-avatar", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({
-image: imageUrl,
-prompt: "Make this uploaded image a cartoonish illustration of a bustling, magical desert city with glowing towers and golden domes at sunset. A young hero (whose face is this) holding a glowing magic lamp stands beside a flying carpet, with a curious monkey and a princess in a jeweled gown nearby. The atmosphere is warm, mystical, and rich with detail—lanterns float, stars twinkle, and sand sparkles."
-})
-});
+  <!-- Personalization Form (Hidden Initially) -->
+  <section id="personalize" class="py-16 px-6 max-w-5xl mx-auto hidden">
+    <div class="glass p-8 rounded-3xl shadow-xl space-y-6">
+      <h2 class="text-2xl font-bold text-sky-600 text-center">Step 2: Personalize Your Hero</h2>
+      <div class="text-center">
+        <input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
+        <p class="text-sm text-gray-500 mt-2">Upload a clear photo. Used to generate your magical avatar.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input id="child-name" type="text" placeholder="Child's Name" class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+        <input type="number" placeholder="Age" class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+        <select class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+          <option disabled selected>Skin Tone</option>
+          <option>Light</option><option>Medium</option><option>Dark</option>
+        </select>
+        <select class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+          <option disabled selected>Hair Style</option>
+          <option>Short</option><option>Long</option><option>Curly</option><option>Straight</option>
+        </select>
+        <select class="border border-gray-300 rounded-xl px-4 py-3 w-full" id="color-picker">
+          <option disabled selected>Favorite Color</option>
+          <option value="Red">🔴 Red</option>
+          <option value="Blue">🔵 Blue</option>
+          <option value="Green">🟢 Green</option>
+          <option value="Yellow">🟡 Yellow</option>
+          <option value="Purple">🟣 Purple</option>
+        </select>
+      </div>
+    </div>
 
-const data = await res.json();
-const avatarUrl = data.image;
+    <!-- Generated Book Pages -->
+    <div id="storybook" class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
 
-if (avatarUrl && typeof avatarUrl === "string") {
-replicateImage.src = avatarUrl;
-replicateImage.alt = "Your magical story page";
-} else {
-replicateImage.alt = "Image generation failed.";
-}
-});
-</script>
+  <script>
+    const personalizeSection = document.getElementById("personalize");
+    const storybookContainer = document.getElementById("storybook");
+
+    function selectCategory(category) {
+      personalizeSection.classList.remove("hidden");
+      window.scrollTo({ top: personalizeSection.offsetTop - 80, behavior: "smooth" });
+    }
+
+    uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
+      const imageUrl = info.cdnUrl;
+
+      const res = await fetch("/api/generate-story-pages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image: imageUrl,
+          prompts: [
+            "storybook portrait of a smiling child in a magical forest",
+            "a colorful fairytale castle in the distance with glowing lights",
+            "the child flying over rooftops on a magic carpet at night",
+            "the child reading with animal friends under a rainbow tree"
+          ]
+        })
+      });
+
+      const data = await res.json();
+      if (data.pages) {
+        storybookContainer.innerHTML = ""; // Clear before inserting
+        data.pages.forEach((url, index) => {
+          const img = document.createElement("img");
+          img.src = url;
+          img.alt = "Generated Page " + (index + 1);
+          img.className = "rounded-xl shadow-lg w-full object-cover";
+          storybookContainer.appendChild(img);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
