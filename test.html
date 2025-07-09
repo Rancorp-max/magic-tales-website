@@ -51,7 +51,12 @@
     
     <!-- Form Panel -->
     <div class="glass p-8 rounded-3xl shadow-xl space-y-6">
-     
+      <h2 class="text-2xl font-bold text-sky-600 text-center">Step 1: Personalize Your Hero</h2>
+
+      <div class="text-center">
+        <input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
+        <p class="text-sm text-gray-500 mt-2">Your photo is only used to generate your character and is deleted after creation.</p>
+      </div>
 
       <div class="space-y-4">
         <input id="child-name" type="text" placeholder="Child's Name" class="w-full border border-gray-300 rounded-xl px-4 py-3">
@@ -85,10 +90,7 @@
     <div class="p-8 rounded-3xl bg-white/70 shadow-2xl flex flex-col items-center text-center">
       <h2 class="text-2xl font-bold text-sky-600 mb-4">✨ Storybook Preview</h2>
       <div class="storybook-frame w-full max-w-[500px] h-[375px] flex items-center justify-center">
-            <div class="text-center">
-        <input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
-        <p class="text-sm text-gray-500 mt-2">Your photo is only used to generate your character and is deleted after creation.</p>
-      </div>
+        
       </div>
         </div>
   </section>
