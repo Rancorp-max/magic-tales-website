@@ -107,41 +107,33 @@
     <div id="storybook" class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
   </section>
 
-  <script>
-    const personalizeSection = document.getElementById("personalize");
-    const storybookContainer = document.getElementById("storybook");
+<!-- Script to Handle Upload + Avatar Generation -->
+<script>
+uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
+const imageUrl = info.cdnUrl;
+const replicateImage = document.getElementById("replicate-image");
+replicateImage.src = "";
+replicateImage.alt = "Generating magic...";
 
-    function selectCategory(category) {
-      personalizeSection.classList.remove("hidden");
-      window.scrollTo({ top: personalizeSection.offsetTop - 80, behavior: "smooth" });
-    }
+const res = await fetch("/api/generate-avatar", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({
+image: imageUrl,
+prompt: "Make this uploaded image a cartoonish illustration of a bustling, magical desert city with glowing towers and golden domes at sunset. A young hero (whose face is this) holding a glowing magic lamp stands beside a flying carpet, with a curious monkey and a princess in a jeweled gown nearby. The atmosphere is warm, mystical, and rich with detail—lanterns float, stars twinkle, and sand sparkles."
+})
+});
 
-    uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
-      const imageUrl = info.cdnUrl;
+const data = await res.json();
+const avatarUrl = data.image;
 
-      const res = await fetch("/api/generate-story-pages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          image: imageUrl,
-          prompts: [
-            "storybook portrait of a smiling child in a magical forest"
-          ]
-        })
-      });
-
-      const data = await res.json();
-      if (data.pages) {
-        storybookContainer.innerHTML = ""; // Clear before inserting
-        data.pages.forEach((url, index) => {
-          const img = document.createElement("img");
-          img.src = url;
-          img.alt = "Generated Page " + (index + 1);
-          img.className = "rounded-xl shadow-lg w-full object-cover";
-          storybookContainer.appendChild(img);
-        });
-      }
-    });
-  </script>
+if (avatarUrl && typeof avatarUrl === "string") {
+replicateImage.src = avatarUrl;
+replicateImage.alt = "Your magical story page";
+} else {
+replicateImage.alt = "Image generation failed.";
+}
+});
+</script>
 </body>
 </html>
