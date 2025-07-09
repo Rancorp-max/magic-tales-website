@@ -41,10 +41,20 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="text-center py-16 px-6 bg-white/40 glass rounded-b-3xl shadow-xl">
-    <h1 class="text-5xl font-extrabold text-sky-600 mb-4">Create Your Magical Storybook</h1>
-    <p class="text-xl text-gray-700 max-w-2xl mx-auto">Upload a photo, personalize your hero, and see the magic unfold!</p>
-  </section>
+<!-- Hero with Background Image -->
+<section class="relative text-center py-28 px-6 overflow-hidden">
+  <!-- Background Image -->
+  <img src="https://images.unsplash.com/photo-1609838463472-6c4b81496fd2?auto=format&fit=crop&w=1920&q=80"
+       alt="Magical Background"
+       class="absolute inset-0 w-full h-full object-cover brightness-75" />
+
+  <!-- Overlay Content -->
+  <div class="relative z-10 max-w-3xl mx-auto glass p-10 rounded-3xl shadow-2xl backdrop-blur-md">
+    <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">Create Your Magical Storybook</h1>
+    <p class="text-xl text-gray-100 drop-shadow max-w-xl mx-auto">Upload a photo, personalize your hero, and preview the magic in a live book.</p>
+  </div>
+</section>
+
 
   <!-- Main Wizard Section -->
   <section class="py-16 px-6 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
