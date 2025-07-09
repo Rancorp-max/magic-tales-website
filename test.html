@@ -49,12 +49,52 @@
        class="absolute inset-0 w-full h-full object-cover brightness-75" />
 
   <!-- Overlay Content -->
-  <div class="relative z-10 max-w-3xl mx-auto glass p-10 rounded-3xl shadow-2xl backdrop-blur-md">
     <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">Create Your Magical Storybook</h1>
     <p class="text-xl text-gray-100 drop-shadow max-w-xl mx-auto">Upload a photo, personalize your hero, and preview the magic in a live book.</p>
   </div>
 </section>
+<!-- Storybook Categories -->
+<section class="py-20 px-6 bg-white/60">
+  <div class="max-w-6xl mx-auto text-center mb-12">
+    <h2 class="text-4xl font-bold text-sky-600 mb-4">Choose Your Storybook Theme</h2>
+    <p class="text-gray-600 text-lg">Pick a magical adventure to begin your personalized journey</p>
+  </div>
 
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <!-- Category Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+      <img src="https://images.unsplash.com/photo-1535909339361-7a3f3f3c2ae4?auto=format&fit=crop&w=600&q=80"
+           alt="Magical Adventure"
+           class="w-full h-48 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-bold text-sky-700 mb-2">Magical Adventures</h3>
+        <p class="text-gray-600 text-sm">Unicorns, forests, and enchanted castles</p>
+      </div>
+    </div>
+
+    <!-- Category Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+      <img src="https://images.unsplash.com/photo-1581091012184-7a1f5f3f108b?auto=format&fit=crop&w=600&q=80"
+           alt="Birthday Book"
+           class="w-full h-48 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-bold text-pink-600 mb-2">Birthday Celebrations</h3>
+        <p class="text-gray-600 text-sm">A custom birthday adventure starring your child</p>
+      </div>
+    </div>
+
+    <!-- Category Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+      <img src="https://images.unsplash.com/photo-1523473827534-1734726e6a30?auto=format&fit=crop&w=600&q=80"
+           alt="Space Explorers"
+           class="w-full h-48 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-bold text-purple-600 mb-2">Space Explorers</h3>
+        <p class="text-gray-600 text-sm">Zoom through galaxies and make alien friends</p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Main Wizard Section -->
   <section class="py-16 px-6 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
