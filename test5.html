@@ -19,7 +19,7 @@
       backdrop-filter: blur(10px);
     }
     .hero {
-      background-image: url('hero5.png'); /* Example hero image */
+      background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c'); /* Example hero image */
       background-size: cover;
       background-position: center;
     }
@@ -29,12 +29,21 @@
 
 <!-- Full Hero Section with Overlay -->
 <section class="hero h-screen flex items-center justify-center relative">
-  <div class="glass max-w-3xl w-full p-10 rounded-3xl shadow-2xl z-10 mx-4">
-    <h1 class="text-4xl font-extrabold text-sky-600 mb-4 text-center">Create Your Magical Storybook</h1>
-    <p class="text-lg text-center text-gray-700 mb-8">Upload a photo, personalize your hero, and see your story come to life.</p>
+  <div class="glass max-w-6xl w-full rounded-3xl shadow-2xl z-10 mx-4 p-8 md:grid md:grid-cols-2 gap-12">
+    <!-- Avatar Preview -->
+    <div class="flex flex-col items-center justify-center text-center">
+      <h2 class="text-2xl font-bold text-sky-600 mb-4">Live Avatar Preview ✨</h2>
+      <div class="w-full max-w-xs h-auto aspect-square bg-white border-4 border-sky-200 rounded-2xl flex items-center justify-center">
+        <img id="avatar-preview" class="w-full h-full object-cover rounded-2xl hidden" />
+      </div>
+      <div id="preview-name" class="text-xl font-semibold text-sky-700 mt-4">Your Child's Name</div>
+    </div>
 
     <!-- Form -->
-    <div class="space-y-5">
+    <div class="space-y-5 mt-10 md:mt-0">
+      <h1 class="text-3xl font-extrabold text-sky-600 text-center">Create Your Magical Storybook</h1>
+      <p class="text-center text-gray-700 mb-4">Upload a photo and personalize your hero!</p>
+
       <div class="text-center">
         <input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
         <p class="text-sm text-gray-500 mt-2">Only used to generate a magical avatar. Deleted after creation.</p>
@@ -53,21 +62,15 @@
         </select>
       </div>
 
-      <input type="color" id="favorite-color" class="w-full border border-gray-300 rounded-xl h-12" title="Favorite Color">
+      <label class="block text-sm font-medium mt-2">Favorite Color</label>
+      <input type="color" id="favorite-color" class="w-full border border-gray-300 rounded-xl h-12">
 
       <textarea rows="2" placeholder="Dedication Message" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
 
-      <input name="email" type="email" required placeholder="Enter your email for 50% off" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-2">
+      <input name="email" type="email" required placeholder="Enter your email for 50% off" class="border border-gray-300 rounded-full px-5 py-3 w-full">
 
       <button id="submit-button" type="button" class="bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-indigo-600 hover:to-sky-600 text-white font-bold px-6 py-3 rounded-full w-full shadow-lg">Continue</button>
     </div>
-  </div>
-
-  <!-- Avatar Preview -->
-  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/80 rounded-xl p-4 shadow-xl">
-    <h2 class="text-center text-sky-600 font-bold text-lg mb-2">Live Preview</h2>
-    <img id="avatar-preview" class="w-48 h-48 rounded-xl object-cover hidden" />
-    <div id="preview-name" class="text-center mt-2 text-lg font-semibold text-sky-700">Your Child's Name</div>
   </div>
 </section>
 
@@ -102,7 +105,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         image: uploadedImageUrl,
-        prompt: `Make this uploaded image a storybook cover of a cartoonish illustration of a bustling, magical desert city with glowing towers and golden domes at sunset. A young hero (whose face is this) holding a glowing magic lamp stands beside a flying carpet, with a curious monkey and a princess in a jeweled gown nearby. The atmosphere is warm, mystical, and rich with detail—lanterns float, stars twinkle, and sand sparkles. Insert text " Melanias birthday book" `
+        prompt: `storybook portrait of ${childName} in a magical setting`
       })
     });
 
