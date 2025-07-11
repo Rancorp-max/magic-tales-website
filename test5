@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MagicTales - Personalized Storybook Creator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <script>
+    UPLOADCARE_PUBLIC_KEY = "cb99310ced30cdf58418"; // Replace with your actual public key
+  </script>
+  <style>
+    body {
+      font-family: 'Baloo 2', cursive;
+    }
+    .glass {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+    }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c'); /* Example hero image */
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+<!-- Full Hero Section with Overlay -->
+<section class="hero h-screen flex items-center justify-center relative">
+  <div class="glass max-w-3xl w-full p-10 rounded-3xl shadow-2xl z-10 mx-4">
+    <h1 class="text-4xl font-extrabold text-sky-600 mb-4 text-center">Create Your Magical Storybook</h1>
+    <p class="text-lg text-center text-gray-700 mb-8">Upload a photo, personalize your hero, and see your story come to life.</p>
+
+    <!-- Form -->
+    <div class="space-y-5">
+      <div class="text-center">
+        <input type="hidden" role="uploadcare-uploader" id="upload-widget" data-crop="1:1" data-images-only data-clearable />
+        <p class="text-sm text-gray-500 mt-2">Only used to generate a magical avatar. Deleted after creation.</p>
+      </div>
+
+      <input id="child-name" type="text" placeholder="Child's Name" class="w-full border border-gray-300 rounded-xl px-4 py-3" oninput="updatePreviewName()">
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <select class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+          <option disabled selected>Skin Tone</option>
+          <option>Light</option><option>Medium</option><option>Dark</option>
+        </select>
+        <select class="border border-gray-300 rounded-xl px-4 py-3 w-full">
+          <option disabled selected>Hair Style</option>
+          <option>Short</option><option>Long</option><option>Curly</option><option>Straight</option>
+        </select>
+      </div>
+
+      <input type="color" id="favorite-color" class="w-full border border-gray-300 rounded-xl h-12" title="Favorite Color">
+
+      <textarea rows="2" placeholder="Dedication Message" class="w-full border border-gray-300 rounded-xl px-4 py-3"></textarea>
+
+      <input name="email" type="email" required placeholder="Enter your email for 50% off" class="border border-gray-300 rounded-full px-5 py-3 w-full mb-2">
+
+      <button id="submit-button" type="button" class="bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-indigo-600 hover:to-sky-600 text-white font-bold px-6 py-3 rounded-full w-full shadow-lg">Continue</button>
+    </div>
+  </div>
+
+  <!-- Avatar Preview -->
+  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/80 rounded-xl p-4 shadow-xl">
+    <h2 class="text-center text-sky-600 font-bold text-lg mb-2">Live Preview</h2>
+    <img id="avatar-preview" class="w-48 h-48 rounded-xl object-cover hidden" />
+    <div id="preview-name" class="text-center mt-2 text-lg font-semibold text-sky-700">Your Child's Name</div>
+  </div>
+</section>
+
+<!-- Scripts -->
+<script>
+  const previewName = document.getElementById("preview-name");
+  const avatarPreview = document.getElementById("avatar-preview");
+  let uploadedImageUrl = null;
+
+  function updatePreviewName() {
+    const nameInput = document.getElementById("child-name").value;
+    previewName.textContent = nameInput || "Your Child's Name";
+  }
+
+  uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete((info) => {
+    uploadedImageUrl = info.cdnUrl;
+  });
+
+  document.getElementById("submit-button").addEventListener("click", async () => {
+    if (!uploadedImageUrl) {
+      alert("Please upload an image before continuing.");
+      return;
+    }
+
+    const childName = document.getElementById("child-name").value || "a smiling child";
+
+    previewName.textContent = "Generating avatar...";
+    avatarPreview.classList.add("hidden");
+
+    const res = await fetch("/api/generate-avatar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image: uploadedImageUrl,
+        prompt: `storybook portrait of ${childName} in a magical setting`
+      })
+    });
+
+    const data = await res.json();
+    if (data.image) {
+      avatarPreview.src = data.image;
+      avatarPreview.classList.remove("hidden");
+      previewName.textContent = childName;
+    } else {
+      previewName.textContent = "Failed to generate image.";
+    }
+  });
+</script>
+
+</body>
+</html>
