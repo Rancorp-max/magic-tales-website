@@ -83,6 +83,7 @@
 
   uploadcare.Widget("[role=uploadcare-uploader]").onUploadComplete(async (info) => {
     const imageUrl = info.cdnUrl;
+    const childName = document.getElementById("child-name").value || "a smiling child";
 
     previewName.textContent = "Generating avatar...";
     avatarPreview.classList.add("hidden");
@@ -92,7 +93,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         image: imageUrl,
-        prompt: "storybook portrait of a smiling child in a magical setting"
+        prompt: `storybook portrait of ${childName} in a magical setting`
       })
     });
 
@@ -100,12 +101,13 @@
     if (data.image) {
       avatarPreview.src = data.image;
       avatarPreview.classList.remove("hidden");
-      previewName.textContent = "Your Magical Story Image";
+      previewName.textContent = childName;
     } else {
       previewName.textContent = "Failed to generate image.";
     }
   });
 </script>
+
 
 </body>
 </html>
