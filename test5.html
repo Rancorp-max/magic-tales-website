@@ -136,7 +136,7 @@
     previewName.textContent = "Generating avatar...";
     avatarPreview.classList.add("hidden");
 
-    const prompt = `Make this uploaded image a storybook cover for ${selectedCategory} with cartoonish style, glowing colors, and a magical theme.Insert text \"${childName}'s ${selectedCategory} Book\"`;
+    const prompt = `Make this uploaded image a storybook cover for ${selectedCategory} with cartoonish style, glowing colors, and a ${selectedCategory}theme. Insert text \"${childName}'s ${selectedCategory} Book\"`;
 
     const res = await fetch("/api/generate-avatar", {
       method: "POST",
