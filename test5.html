@@ -19,7 +19,7 @@
       backdrop-filter: blur(10px);
     }
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c');
+      background-image: url('hero4.png');
       background-size: cover;
       background-position: center;
     }
@@ -37,6 +37,38 @@
     </nav>
   </div>
 </header>
+<!-- How It Works Section -->
+<section id="howitworks" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-sky-600 mb-12">How It Works</h2>
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <img src="https://img.icons8.com/color/96/image-file.png" class="mx-auto mb-4" />
+        <h3 class="text-xl font-semibold mb-2">1. Upload a Photo</h3>
+        <p class="text-gray-600">Just one clear image of your child is all we need to create a magical avatar.</p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/color/96/book.png" class="mx-auto mb-4" />
+        <h3 class="text-xl font-semibold mb-2">2. Pick a Category</h3>
+        <p class="text-gray-600">Select from 50+ engaging story categories tailored to different ages and interests.</p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/color/96/gift.png" class="mx-auto mb-4" />
+        <h3 class="text-xl font-semibold mb-2">3. Get the Book</h3>
+        <p class="text-gray-600">Receive a one-of-a-kind storybook delivered to your inbox or doorstep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section id="categories" class="py-20 bg-sky-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-sky-600 text-center mb-10">Explore Book Categories</h2>
+    <input id="categorySearch" type="text" placeholder="Search categories..." class="w-full max-w-xl block mx-auto px-5 py-3 mb-10 rounded-full border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400" />
+    <div id="categoryGrid" class="grid md:grid-cols-4 gap-6"></div>
+  </div>
+</section>
 
 <!-- Hero Section + Personalization -->
 <section class="hero h-screen flex items-center justify-center relative">
@@ -74,38 +106,6 @@
   </div>
 </section>
 
-<!-- How It Works Section -->
-<section id="howitworks" class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold text-sky-600 mb-12">How It Works</h2>
-    <div class="grid md:grid-cols-3 gap-12">
-      <div>
-        <img src="https://img.icons8.com/color/96/image-file.png" class="mx-auto mb-4" />
-        <h3 class="text-xl font-semibold mb-2">1. Upload a Photo</h3>
-        <p class="text-gray-600">Just one clear image of your child is all we need to create a magical avatar.</p>
-      </div>
-      <div>
-        <img src="https://img.icons8.com/color/96/book.png" class="mx-auto mb-4" />
-        <h3 class="text-xl font-semibold mb-2">2. Pick a Category</h3>
-        <p class="text-gray-600">Select from 50+ engaging story categories tailored to different ages and interests.</p>
-      </div>
-      <div>
-        <img src="https://img.icons8.com/color/96/gift.png" class="mx-auto mb-4" />
-        <h3 class="text-xl font-semibold mb-2">3. Get the Book</h3>
-        <p class="text-gray-600">Receive a one-of-a-kind storybook delivered to your inbox or doorstep.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Categories Section -->
-<section id="categories" class="py-20 bg-sky-50">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-sky-600 text-center mb-10">Explore Book Categories</h2>
-    <input id="categorySearch" type="text" placeholder="Search categories..." class="w-full max-w-xl block mx-auto px-5 py-3 mb-10 rounded-full border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400" />
-    <div id="categoryGrid" class="grid md:grid-cols-4 gap-6"></div>
-  </div>
-</section>
 
 <script>
   let selectedCategory = "";
